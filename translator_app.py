@@ -6,7 +6,7 @@ from io import StringIO
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = '/tmp/uploads'
-app.config['MAX_CONTENT_LENGTH'] = 1024 * 1024 * 1024  # 16MB max file size
+app.config['MAX_CONTENT_LENGTH'] = 256 * 1024 * 1024  # 256MB max file size
 
 # Create uploads folder if it doesn't exist
 os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
@@ -63,7 +63,7 @@ HTML_TEMPLATE = '''
             100% { transform: rotate(360deg); }
         }
         
-        .submit-btn, .cancel-btn {
+        .submit-btn, .cancel-btn, .download-btn {
             background-color: #3498db;
             color: white;
             padding: 10px 20px;
@@ -76,11 +76,18 @@ HTML_TEMPLATE = '''
         .cancel-btn {
             background-color: #e74c3c;
         }
+        .download-btn {
+            background-color: #27ae60;
+            display: none;
+        }
         .submit-btn:hover {
             background-color: #2980b9;
         }
         .cancel-btn:hover {
             background-color: #c0392b;
+        }
+        .download-btn:hover {
+            background-color: #219a52;
         }
         
         .file-input-container {
@@ -90,6 +97,12 @@ HTML_TEMPLATE = '''
         .buttons-container {
             display: flex;
             gap: 10px;
+        }
+
+        .file-size-limit {
+            color: #666;
+            font-size: 0.9em;
+            margin-top: 5px;
         }
     </style>
 </head>
@@ -112,9 +125,13 @@ HTML_TEMPLATE = '''
             <div class="file-input-container">
                 <p>Select a .txt file in English:</p>
                 <input type="file" name="file" accept=".txt" required>
+                <p class="file-size-limit">Maximum file size: 256MB</p>
             </div>
             <div class="buttons-container">
                 <input type="submit" value="Translate" class="submit-btn">
+                <button type="button" class="download-btn" onclick="downloadTranslation()" style="display: none;">
+                    Download Translation
+                </button>
             </div>
         </form>
     </div>
@@ -123,9 +140,12 @@ HTML_TEMPLATE = '''
         let startTime;
         let timerInterval;
         let controller = null;
+        let translatedBlob = null;
+        let translatedFileName = null;
         const form = document.getElementById('uploadForm');
         const spinnerOverlay = document.querySelector('.spinner-overlay');
         const timerDisplay = document.querySelector('.timer');
+        const downloadBtn = document.querySelector('.download-btn');
 
         function updateTimer() {
             const currentTime = new Date();
@@ -154,11 +174,28 @@ HTML_TEMPLATE = '''
                 controller = null;
             }
             hideSpinner();
+            downloadBtn.style.display = 'none';
+        }
+
+        function downloadTranslation() {
+            if (translatedBlob && translatedFileName) {
+                const url = window.URL.createObjectURL(translatedBlob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = translatedFileName;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                window.URL.revokeObjectURL(url);
+            }
         }
 
         form.addEventListener('submit', async function(e) {
             e.preventDefault();
             const fileInput = document.querySelector('input[type="file"]');
+            downloadBtn.style.display = 'none';
+            translatedBlob = null;
+            translatedFileName = null;
             
             if (fileInput.files.length > 0) {
                 spinnerOverlay.style.display = 'flex';
@@ -176,15 +213,9 @@ HTML_TEMPLATE = '''
                     });
 
                     if (response.ok) {
-                        const blob = await response.blob();
-                        const url = window.URL.createObjectURL(blob);
-                        const a = document.createElement('a');
-                        a.href = url;
-                        a.download = response.headers.get('Content-Disposition').split('filename=')[1];
-                        document.body.appendChild(a);
-                        a.click();
-                        document.body.removeChild(a);
-                        window.URL.revokeObjectURL(url);
+                        translatedBlob = await response.blob();
+                        translatedFileName = response.headers.get('Content-Disposition').split('filename=')[1];
+                        downloadBtn.style.display = 'block';
                     } else {
                         const errorData = await response.text();
                         throw new Error(errorData);
