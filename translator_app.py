@@ -1,17 +1,16 @@
-from flask import Flask, request, send_file, render_template_string
+from flask import Flask, request, send_file, render_template_string, jsonify
 from googletrans import Translator
 from werkzeug.utils import secure_filename
 import os
 from io import StringIO
 
 app = Flask(__name__)
-app.config['UPLOAD_FOLDER'] = '/tmp/uploads'
+app.config['UPLOAD_FOLDER'] = 'uploads'
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16MB max file size
 
 # Create uploads folder if it doesn't exist
 os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
 
-# HTML template with spinner and timer
 HTML_TEMPLATE = '''
 <!DOCTYPE html>
 <html>
@@ -33,7 +32,6 @@ HTML_TEMPLATE = '''
         .error { color: red; }
         .success { color: green; }
         
-        /* Spinner Styles */
         .spinner-overlay {
             display: none;
             position: fixed;
@@ -65,8 +63,7 @@ HTML_TEMPLATE = '''
             100% { transform: rotate(360deg); }
         }
         
-        /* Button Styles */
-        .submit-btn {
+        .submit-btn, .cancel-btn {
             background-color: #3498db;
             color: white;
             padding: 10px 20px;
@@ -74,14 +71,25 @@ HTML_TEMPLATE = '''
             border-radius: 5px;
             cursor: pointer;
             font-size: 16px;
+            margin-right: 10px;
+        }
+        .cancel-btn {
+            background-color: #e74c3c;
         }
         .submit-btn:hover {
             background-color: #2980b9;
         }
+        .cancel-btn:hover {
+            background-color: #c0392b;
+        }
         
-        /* File Input Styles */
         .file-input-container {
             margin: 20px 0;
+        }
+
+        .buttons-container {
+            display: flex;
+            gap: 10px;
         }
     </style>
 </head>
@@ -89,6 +97,7 @@ HTML_TEMPLATE = '''
     <div class="spinner-overlay">
         <div class="spinner"></div>
         <div class="timer">00:00.000</div>
+        <button class="cancel-btn" onclick="cancelTranslation()">Cancel</button>
     </div>
     
     <div class="container">
@@ -104,13 +113,16 @@ HTML_TEMPLATE = '''
                 <p>Select a .txt file in English:</p>
                 <input type="file" name="file" accept=".txt" required>
             </div>
-            <input type="submit" value="Translate" class="submit-btn">
+            <div class="buttons-container">
+                <input type="submit" value="Translate" class="submit-btn">
+            </div>
         </form>
     </div>
 
     <script>
         let startTime;
         let timerInterval;
+        let controller = null;
         const form = document.getElementById('uploadForm');
         const spinnerOverlay = document.querySelector('.spinner-overlay');
         const timerDisplay = document.querySelector('.timer');
@@ -125,16 +137,71 @@ HTML_TEMPLATE = '''
             timerDisplay.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}.${milliseconds.toString().padStart(3, '0')}`;
         }
 
-        form.addEventListener('submit', function(e) {
+        function hideSpinner() {
+            spinnerOverlay.style.display = 'none';
+            if (timerInterval) {
+                clearInterval(timerInterval);
+            }
+            timerDisplay.textContent = '00:00.000';
+            if (controller) {
+                controller = null;
+            }
+        }
+
+        function cancelTranslation() {
+            if (controller) {
+                controller.abort();
+                controller = null;
+            }
+            hideSpinner();
+        }
+
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault();
             const fileInput = document.querySelector('input[type="file"]');
+            
             if (fileInput.files.length > 0) {
                 spinnerOverlay.style.display = 'flex';
                 startTime = new Date();
                 timerInterval = setInterval(updateTimer, 10);
+
+                const formData = new FormData(form);
+                controller = new AbortController();
+
+                try {
+                    const response = await fetch('/', {
+                        method: 'POST',
+                        body: formData,
+                        signal: controller.signal
+                    });
+
+                    if (response.ok) {
+                        const blob = await response.blob();
+                        const url = window.URL.createObjectURL(blob);
+                        const a = document.createElement('a');
+                        a.href = url;
+                        a.download = response.headers.get('Content-Disposition').split('filename=')[1];
+                        document.body.appendChild(a);
+                        a.click();
+                        document.body.removeChild(a);
+                        window.URL.revokeObjectURL(url);
+                    } else {
+                        const errorData = await response.text();
+                        throw new Error(errorData);
+                    }
+                } catch (error) {
+                    if (error.name === 'AbortError') {
+                        console.log('Translation cancelled');
+                    } else {
+                        console.error('Error:', error);
+                    }
+                } finally {
+                    hideSpinner();
+                }
             }
         });
 
-        // Clean up timer when leaving the page
+        // Clean up when leaving the page
         window.addEventListener('beforeunload', function() {
             if (timerInterval) {
                 clearInterval(timerInterval);
@@ -162,28 +229,17 @@ def upload_file():
             return render_template_string(HTML_TEMPLATE, error='Please upload a .txt file')
         
         try:
-            # Read the content of the uploaded file
             content = file.read().decode('utf-8')
-            
-            # Initialize translator
             translator = Translator()
-            
-            # Translate content
             translated = translator.translate(content, src='en', dest='ro')
             
-            # Create a file-like object with the translated content
-            translated_file = StringIO(translated.text)
-            
-            # Generate translated filename
             original_filename = secure_filename(file.filename)
             translated_filename = f"romanian_{original_filename}"
             
-            # Save translated content to a temporary file
             temp_path = os.path.join(app.config['UPLOAD_FOLDER'], translated_filename)
             with open(temp_path, 'w', encoding='utf-8') as f:
                 f.write(translated.text)
             
-            # Send the translated file to the user
             return send_file(
                 temp_path,
                 as_attachment=True,
@@ -197,4 +253,4 @@ def upload_file():
     return render_template_string(HTML_TEMPLATE)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, port=5055)
