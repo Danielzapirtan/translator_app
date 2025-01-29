@@ -2,7 +2,8 @@ from flask import Flask, request, send_file, render_template_string, jsonify
 from googletrans import Translator
 from werkzeug.utils import secure_filename
 import os
-from io import StringIO
+import re
+import unicodedata
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = '/tmp/uploads'
@@ -10,6 +11,30 @@ app.config['MAX_CONTENT_LENGTH'] = 256 * 1024 * 1024  # 256MB max file size
 
 # Create uploads folder if it doesn't exist
 os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
+
+def clean_text(text):
+    """
+    Clean text by:
+    1. Converting to NFKD form and removing combining characters
+    2. Keeping only ASCII characters, basic punctuation, and whitespace
+    3. Removing control characters except basic whitespace
+    """
+    # Convert to NFKD form and remove combining characters
+    text = unicodedata.normalize('NFKD', text).encode('ASCII', 'ignore').decode('ASCII')
+    
+    # Define allowed characters (English letters, numbers, basic punctuation, whitespace)
+    allowed_chars = re.compile(r'[^a-zA-Z0-9\s.,!?"\';:()\-\n]')
+    text = allowed_chars.sub('', text)
+    
+    # Remove control characters while keeping basic whitespace
+    text = ''.join(char for char in text if unicodedata.category(char)[0] != 'C' or char in '\n\t ')
+    
+    # Normalize whitespace (remove multiple spaces, but keep paragraphs)
+    text = re.sub(r' +', ' ', text)
+    text = re.sub(r'\n\s*\n', '\n\n', text)
+    text = text.strip()
+    
+    return text
 
 HTML_TEMPLATE = '''
 <!DOCTYPE html>
@@ -260,9 +285,16 @@ def upload_file():
             return render_template_string(HTML_TEMPLATE, error='Please upload a .txt file')
         
         try:
+            # Read and clean the content before translation
             content = file.read().decode('utf-8')
+            cleaned_content = clean_text(content)
+            
+            if not cleaned_content.strip():
+                return render_template_string(HTML_TEMPLATE, 
+                    error='After cleaning non-English characters, the file is empty')
+            
             translator = Translator()
-            translated = translator.translate(content, src='en', dest='ro')
+            translated = translator.translate(cleaned_content, src='en', dest='ro')
             
             original_filename = secure_filename(file.filename)
             translated_filename = f"romanian_{original_filename}"
