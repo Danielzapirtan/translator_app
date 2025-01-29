@@ -293,15 +293,39 @@ def upload_file():
                 return render_template_string(HTML_TEMPLATE, 
                     error='After cleaning non-English characters, the file is empty')
             
+            # Split content into smaller chunks if it's large
+            max_chunk_size = 5000  # characters
+            chunks = [cleaned_content[i:i + max_chunk_size] 
+                     for i in range(0, len(cleaned_content), max_chunk_size)]
+            
             translator = Translator()
-            translated = translator.translate(cleaned_content, src='en', dest='ro')
+            translated_chunks = []
+            
+            for chunk in chunks:
+                # Add retry logic for each chunk
+                max_retries = 3
+                for attempt in range(max_retries):
+                    try:
+                        translated = translator.translate(chunk, src='en', dest='ro')
+                        if translated and translated.text:
+                            translated_chunks.append(translated.text)
+                            break
+                    except Exception as e:
+                        if attempt == max_retries - 1:
+                            raise
+                        continue
+            
+            if not translated_chunks:
+                raise Exception("Translation failed to produce any output")
+            
+            translated_content = ' '.join(translated_chunks)
             
             original_filename = secure_filename(file.filename)
             translated_filename = f"romanian_{original_filename}"
             
             temp_path = os.path.join(app.config['UPLOAD_FOLDER'], translated_filename)
             with open(temp_path, 'w', encoding='utf-8') as f:
-                f.write(translated.text)
+                f.write(translated_content)
             
             return send_file(
                 temp_path,
