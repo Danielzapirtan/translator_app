@@ -4,6 +4,7 @@ import unicodedata
 import re
 import os
 import tempfile
+import asyncio
 
 # Create a temporary directory for storing files
 TEMP_DIR = tempfile.mkdtemp()
