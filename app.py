@@ -1,70 +1,35 @@
-# Install required packages
+from flask import Flask, request, render_template, send_file, jsonify
 import subprocess
 import time
 import requests
-import threading
-import io
 import PyPDF2
 import docx
-from flask import Flask, request, render_template, send_file
+import os
+import uuid
+from werkzeug.utils import secure_filename
 
-# Install required packages using pip
-subprocess.run(["pip", "install", "flask", "libretranslate", "pypdf2", "python-docx"])
-
-# Clone and setup LibreTranslate
-subprocess.run(["rm", "-rf", "LibreTranslate"])
-subprocess.run(["git", "clone", "https://github.com/LibreTranslate/LibreTranslate.git"])
-subprocess.run(["pip", "install", "-e", "LibreTranslate"])
-
-# Download language models for English and Romanian
-subprocess.run(["python", "-m", "libretranslate.download", "--install-all", "--quiet", "en", "ro"])
-
-# Run LibreTranslate API server in the background
-def start_libretranslate_server():
-    process = subprocess.Popen(
-        ["libretranslate", "--host", "0.0.0.0", "--port", "5000", "--load-only", "en,ro"],
-        stdout=subprocess.PIPE,
-        stderr=subprocess.PIPE
-    )
-    return process
-
-# Start the server in a separate thread
-server_process = start_libretranslate_server()
-print("Starting LibreTranslate server...")
-time.sleep(10)  # Give it time to start
-
-# Test if the server is up
-try:
-    response = requests.get("http://127.0.0.1:5000/languages")
-    if response.status_code == 200:
-        print("LibreTranslate server is running!")
-        print(f"Available languages: {response.json()}")
-    else:
-        print(f"Server is up but returned status code {response.status_code}")
-except requests.exceptions.ConnectionError:
-    print("Failed to connect to LibreTranslate server")
+# Initialize Flask app
+app = Flask(__name__)
+app.config['UPLOAD_FOLDER'] = 'uploads'
+app.config['TRANSLATED_FOLDER'] = 'translated_files'
+os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
+os.makedirs(app.config['TRANSLATED_FOLDER'], exist_ok=True)
 
 # Function to extract text from different file types
-def extract_text_from_file(file):
-    """
-    Extract text from various file types
-    Supports .txt, .pdf, .docx files
-    """
-    filename = file.filename
-    if filename.endswith('.txt'):
-        return file.read().decode('utf-8')
-
-    elif filename.endswith('.pdf'):
-        reader = PyPDF2.PdfReader(file)
-        text = ''
-        for page in reader.pages:
-            text += page.extract_text()
-        return text
-
-    elif filename.endswith('.docx'):
-        doc = docx.Document(file)
+def extract_text_from_file(file_path):
+    if file_path.endswith('.txt'):
+        with open(file_path, 'r', encoding='utf-8') as f:
+            return f.read()
+    elif file_path.endswith('.pdf'):
+        with open(file_path, 'rb') as f:
+            reader = PyPDF2.PdfReader(f)
+            text = ''
+            for page in reader.pages:
+                text += page.extract_text()
+            return text
+    elif file_path.endswith('.docx'):
+        doc = docx.Document(file_path)
         return '\n'.join([paragraph.text for paragraph in doc.paragraphs if paragraph.text])
-
     else:
         return "Unsupported file type. Please upload .txt, .pdf, or .docx files."
 
@@ -89,48 +54,65 @@ def translate_text(text, source_lang, target_lang):
         return f"Translation error: {str(e)}"
 
 # Function to translate file content
-def translate_file(file, source_lang, target_lang):
-    """
-    Translate the content of an uploaded file
-    """
+def translate_file(file_path, source_lang, target_lang):
     # Extract text from the file
-    text = extract_text_from_file(file)
+    text = extract_text_from_file(file_path)
 
     # Translate the extracted text
     translated_text = translate_text(text, source_lang, target_lang)
 
     # Save translated text to a new file
-    output_filename = f"translated_{file.filename}"
+    output_filename = os.path.join(app.config['TRANSLATED_FOLDER'], f"translated_{os.path.basename(file_path)}")
     with open(output_filename, 'w', encoding='utf-8') as f:
         f.write(translated_text)
 
     return output_filename
 
-# Create Flask application
-app = Flask(__name__)
-
+# Route for the main page
 @app.route("/", methods=["GET", "POST"])
 def index():
-    if request.method == "POST":
-        if "text" in request.form:
-            # Handle text translation
-            source_text = request.form["source_text"]
-            source_lang = request.form["source_lang"]
-            target_lang = request.form["target_lang"]
-            translated_text = translate_text(source_text, source_lang, target_lang)
-            return render_template("index.html", translated_text=translated_text)
-        elif "file" in request.files:
-            # Handle file translation
-            file = request.files["file"]
-            source_lang = request.form["file_source_lang"]
-            target_lang = request.form["file_target_lang"]
-            output_filename = translate_file(file, source_lang, target_lang)
-            return send_file(output_filename, as_attachment=True)
     return render_template("index.html")
+
+# Route to handle file upload and translation
+@app.route("/upload", methods=["POST"])
+def upload_file():
+    if "file" not in request.files:
+        return jsonify({"error": "No file uploaded"}), 400
+
+    file = request.files["file"]
+    if file.filename == "":
+        return jsonify({"error": "No file selected"}), 400
+
+    # Save the uploaded file
+    file_id = str(uuid.uuid4())
+    file_path = os.path.join(app.config['UPLOAD_FOLDER'], secure_filename(file.filename))
+    file.save(file_path)
+
+    # Get translation parameters
+    source_lang = request.form.get("source_lang", "en")
+    target_lang = request.form.get("target_lang", "ro")
+
+    # Simulate processing delay (for demonstration purposes)
+    time.sleep(2)
+
+    # Translate the file
+    translated_file_path = translate_file(file_path, source_lang, target_lang)
+
+    # Return the translated file for download
+    return jsonify({
+        "status": "completed",
+        "download_url": f"/download/{os.path.basename(translated_file_path)}"
+    })
+
+# Route to download translated files
+@app.route("/download/<filename>", methods=["GET"])
+def download_file(filename):
+    return send_file(os.path.join(app.config['TRANSLATED_FOLDER'], filename), as_attachment=True)
+
+# Route to check processing status
+@app.route("/status", methods=["GET"])
+def check_status():
+    return jsonify({"status": "processing"})  # Simulate processing status
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=7860)
-
-# Add instructions for properly cleaning up when done
-print("\nIMPORTANT: When you're done, run the following code to properly stop the server:")
-print("server_process.terminate()")
