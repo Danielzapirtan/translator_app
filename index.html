@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LibreTranslate - English ↔ Romanian</title>
+</head>
+<body>
+    <h1>LibreTranslate - English ↔ Romanian</h1>
+    <form method="POST">
+        <h2>Text Translation</h2>
+        <textarea name="source_text" rows="5" placeholder="Enter text to translate..."></textarea>
+        <select name="source_lang">
+            <option value="en">English</option>
+            <option value="ro">Romanian</option>
+        </select>
+        <select name="target_lang">
+            <option value="ro">Romanian</option>
+            <option value="en">English</option>
+        </select>
+        <button type="submit" name="text">Translate</button>
+        <textarea rows="5" readonly>{{ translated_text }}</textarea>
+    </form>
+
+    <form method="POST" enctype="multipart/form-data">
+        <h2>File Translation</h2>
+        <input type="file" name="file" accept=".txt,.pdf,.docx">
+        <select name="file_source_lang">
+            <option value="en">English</option>
+            <option value="ro">Romanian</option>
+        </select>
+        <select name="file_target_lang">
+            <option value="ro">Romanian</option>
+            <option value="en">English</option>
+        </select>
+        <button type="submit" name="file">Translate File</button>
+    </form>
+</body>
+</html>
