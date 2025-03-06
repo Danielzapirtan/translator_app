@@ -6,10 +6,10 @@ import threading
 import io
 import PyPDF2
 import docx
-import gradio as gr
+from flask import Flask, request, render_template, send_file
 
 # Install required packages using pip
-subprocess.run(["pip", "install", "gradio", "libretranslate", "flask", "pypdf2", "python-docx"])
+subprocess.run(["pip", "install", "flask", "libretranslate", "pypdf2", "python-docx"])
 
 # Clone and setup LibreTranslate
 subprocess.run(["rm", "-rf", "LibreTranslate"])
@@ -50,21 +50,19 @@ def extract_text_from_file(file):
     Extract text from various file types
     Supports .txt, .pdf, .docx files
     """
-    filename = file.name
+    filename = file.filename
     if filename.endswith('.txt'):
-        with open(filename, 'r', encoding='utf-8') as f:
-            return f.read()
+        return file.read().decode('utf-8')
 
     elif filename.endswith('.pdf'):
-        with open(filename, 'rb') as f:
-            reader = PyPDF2.PdfReader(f)
-            text = ''
-            for page in reader.pages:
-                text += page.extract_text()
-            return text
+        reader = PyPDF2.PdfReader(file)
+        text = ''
+        for page in reader.pages:
+            text += page.extract_text()
+        return text
 
     elif filename.endswith('.docx'):
-        doc = docx.Document(filename)
+        doc = docx.Document(file)
         return '\n'.join([paragraph.text for paragraph in doc.paragraphs if paragraph.text])
 
     else:
@@ -102,75 +100,36 @@ def translate_file(file, source_lang, target_lang):
     translated_text = translate_text(text, source_lang, target_lang)
 
     # Save translated text to a new file
-    output_filename = f"translated_{file.name.split('/')[-1]}"
+    output_filename = f"translated_{file.filename}"
     with open(output_filename, 'w', encoding='utf-8') as f:
         f.write(translated_text)
 
     return output_filename
 
-# Create Gradio interface
-with gr.Blocks() as app:
-    gr.Markdown("# LibreTranslate - English ↔ Romanian")
+# Create Flask application
+app = Flask(__name__)
 
-    with gr.Tabs():
-        with gr.TabItem("Text Translation"):
-            with gr.Row():
-                with gr.Column():
-                    source_text = gr.Textbox(label="Source Text", lines=5, placeholder="Enter text to translate...")
-                    source_lang = gr.Dropdown(choices=["en", "ro"], value="en", label="Source Language")
+@app.route("/", methods=["GET", "POST"])
+def index():
+    if request.method == "POST":
+        if "text" in request.form:
+            # Handle text translation
+            source_text = request.form["source_text"]
+            source_lang = request.form["source_lang"]
+            target_lang = request.form["target_lang"]
+            translated_text = translate_text(source_text, source_lang, target_lang)
+            return render_template("index.html", translated_text=translated_text)
+        elif "file" in request.files:
+            # Handle file translation
+            file = request.files["file"]
+            source_lang = request.form["file_source_lang"]
+            target_lang = request.form["file_target_lang"]
+            output_filename = translate_file(file, source_lang, target_lang)
+            return send_file(output_filename, as_attachment=True)
+    return render_template("index.html")
 
-                with gr.Column():
-                    target_text = gr.Textbox(label="Translated Text", lines=5)
-                    target_lang = gr.Dropdown(choices=["en", "ro"], value="ro", label="Target Language")
-
-            # Text translation buttons
-            with gr.Row():
-                translate_btn = gr.Button("Translate")
-                swap_btn = gr.Button("Swap Languages")
-
-        with gr.TabItem("File Translation"):
-            with gr.Row():
-                file_input = gr.File(label="Upload File", type="filepath", file_types=['.txt', '.pdf', '.docx'])
-                file_source_lang = gr.Dropdown(choices=["en", "ro"], value="en", label="Source Language")
-                file_target_lang = gr.Dropdown(choices=["en", "ro"], value="ro", label="Target Language")
-
-            file_translate_btn = gr.Button("Translate File")
-            file_output = gr.File(label="Translated File")
-
-    # Set up event handlers for text translation
-    translate_btn.click(
-        fn=translate_text,
-        inputs=[source_text, source_lang, target_lang],
-        outputs=target_text
-    )
-
-    # Add language swap functionality for text
-    def swap_languages(source, target):
-        return target, source
-
-    swap_btn.click(
-        fn=swap_languages,
-        inputs=[source_lang, target_lang],
-        outputs=[source_lang, target_lang]
-    )
-
-    # Set up event handlers for file translation
-    file_translate_btn.click(
-        fn=translate_file,
-        inputs=[file_input, file_source_lang, file_target_lang],
-        outputs=file_output
-    )
-
-    gr.Markdown("""
-    ### Notes:
-    - This is running LibreTranslate locally
-    - Only English (en) and Romanian (ro) models are loaded
-    - Translation happens entirely on this instance
-    - Supports .txt, .pdf, and .docx file translations
-    """)
-
-# Launch the application
-app.launch(server_name="0.0.0.0", server_port=7860)
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=7860)
 
 # Add instructions for properly cleaning up when done
 print("\nIMPORTANT: When you're done, run the following code to properly stop the server:")
