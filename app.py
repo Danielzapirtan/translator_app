@@ -2,7 +2,6 @@ from deep_translator import GoogleTranslator
 import gradio as gr
 
 def translate_text(text):
-    # Translate the text from English to Romanian
     translation = GoogleTranslator(source='en', target='ro').translate(text)
     return translation
 
