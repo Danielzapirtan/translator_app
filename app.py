@@ -16,24 +16,30 @@ def translate_text(text, src_lang='en', dest_lang='ro'):
 
 def extract_text_from_pdf(file):
     """Extract text from a PDF file."""
-    reader = PyPDF2.PdfFileReader(file)
-    text = ''
-    for page_num in range(reader.numPages):
-        page = reader.getPage(page_num)
-        text += page.extract_text()
-    return text
+    try:
+        reader = PyPDF2.PdfFileReader(file)
+        text = ''
+        for page_num in range(reader.numPages):
+            page = reader.getPage(page_num)
+            text += page.extract_text()
+        return text
+    except Exception as e:
+        return f"Error extracting text from PDF: {e}"
 
 def translate_file(file):
     """Translate the content of a file."""
-    if file.name.endswith('.txt'):
-        with open(file.name, 'r') as f:
-            text = f.read()
-    elif file.name.endswith('.pdf'):
-        text = extract_text_from_pdf(file)
-    else:
-        return "Unsupported file format. Please upload a TXT or PDF file."
+    try:
+        if file.name.endswith('.txt'):
+            with open(file.name, 'r', encoding='utf-8') as f:
+                text = f.read()
+        elif file.name.endswith('.pdf'):
+            text = extract_text_from_pdf(file)
+        else:
+            return "Unsupported file format. Please upload a TXT or PDF file."
 
-    return translate_text(text)
+        return translate_text(text)
+    except Exception as e:
+        return f"Error processing file: {e}"
 
 # Gradio interface
 iface = gr.Interface(
