@@ -38,8 +38,8 @@ def translate_file(file):
 # Gradio interface
 iface = gr.Interface(
     fn=translate_file,
-    inputs=gr.inputs.File(label="Upload a TXT or PDF file"),
-    outputs=gr.outputs.Textbox(label="Translated Text"),
+    inputs=gr.components.File(label="Upload a TXT or PDF file"),
+    outputs=gr.components.Textbox(label="Translated Text"),
     title="English to Romanian File Translator",
     description="Upload a TXT or PDF file to translate its content from English to Romanian."
 )
