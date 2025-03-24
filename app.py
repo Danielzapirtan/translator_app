@@ -2,53 +2,57 @@
 import gradio as gr
 from googletrans import Translator
 import PyPDF2
+from google.colab import files
 
-# Initialize the translator
-translator = Translator()
-
-def translate_text(text, src_lang='en', dest_lang='ro'):
-    """Translate text from source language to destination language."""
+def translate_file(file_obj):
+    if file_obj is None:
+        return "Please upload a file first!"
+    
+    # Initialize translator
+    translator = Translator()
+    
+    # Get file extension
+    file_name = file_obj.name.lower()
+    translated_text = ""
+    
     try:
-        translated = translator.translate(text, src=src_lang, dest=dest_lang)
-        return translated.text
-    except Exception as e:
-        return f"Error in translation: {e}"
-
-def extract_text_from_pdf(file):
-    """Extract text from a PDF file."""
-    try:
-        reader = PyPDF2.PdfFileReader(file)
-        text = ''
-        for page_num in range(reader.numPages):
-            page = reader.getPage(page_num)
-            text += page.extract_text()
-        return text
-    except Exception as e:
-        return f"Error extracting text from PDF: {e}"
-
-def translate_file(file):
-    """Translate the content of a file."""
-    try:
-        if file.name.endswith('.txt'):
-            with open(file.name, 'r', encoding='utf-8') as f:
+        if file_name.endswith('.txt'):
+            # Read TXT file
+            with open(file_obj.name, 'r', encoding='utf-8') as f:
                 text = f.read()
-        elif file.name.endswith('.pdf'):
-            text = extract_text_from_pdf(file)
+            # Translate
+            translated = translator.translate(text, src='en', dest='ro')
+            translated_text = translated.text
+            
+        elif file_name.endswith('.pdf'):
+            # Read PDF file
+            pdf_reader = PyPDF2.PdfReader(file_obj)
+            num_pages = len(pdf_reader.pages)
+            text = ""
+            # Extract text from all pages
+            for page in range(num_pages):
+                text += pdf_reader.pages[page].extract_text()
+            # Translate
+            translated = translator.translate(text, src='en', dest='ro')
+            translated_text = translated.text
+            
         else:
-            return "Unsupported file format. Please upload a TXT or PDF file."
-
-        return translate_text(text)
+            return "Please upload a TXT or PDF file!"
+            
+        return translated_text
+    
     except Exception as e:
-        return f"Error processing file: {e}"
+        return f"Error processing file: {str(e)}"
 
-# Gradio interface
-iface = gr.Interface(
+# Create Gradio interface
+interface = gr.Interface(
     fn=translate_file,
-    inputs=gr.components.File(label="Upload a TXT or PDF file"),
-    outputs=gr.components.Textbox(label="Translated Text"),
+    inputs=gr.File(label="Upload TXT or PDF file"),
+    outputs=gr.Textbox(label="Translated Text (Romanian)"),
     title="English to Romanian File Translator",
-    description="Upload a TXT or PDF file to translate its content from English to Romanian."
+    description="Upload a TXT or PDF file in English to translate it to Romanian",
+    allow_flagging="never"
 )
 
-# Launch the app
-iface.launch(debug=True)
+# Launch the interface
+interface.launch(debug=True)
