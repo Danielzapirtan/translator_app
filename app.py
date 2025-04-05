@@ -1,18 +1,25 @@
+from flask import Flask, render_template, request, jsonify
 from deep_translator import GoogleTranslator
-import gradio as gr
 
-def translate_text(text):
-    translation = GoogleTranslator(source='en', target='ro').translate(text)
-    return translation
+app = Flask(__name__)
 
-# Create a Gradio interface
-iface = gr.Interface(
-    fn=translate_text,  # Function to call
-    inputs="text",      # Input type
-    outputs="text",     # Output type
-    title="English to Romanian Translator",
-    description="Enter text in English and get it translated to Romanian."
-)
+@app.route('/', methods=['GET', 'POST'])
+def index():
+    translation = ""
+    if request.method == 'POST':
+        text = request.form.get('text', '')
+        if text:
+            translation = GoogleTranslator(source='en', target='ro').translate(text)
+    return render_template('index.html', translation=translation)
 
-# Launch the Gradio app
-iface.launch()
+@app.route('/api/translate', methods=['POST'])
+def translate_api():
+    data = request.get_json()
+    text = data.get('text', '')
+    translation = ""
+    if text:
+        translation = GoogleTranslator(source='en', target='ro').translate(text)
+    return jsonify({'translation': translation})
+
+if __name__ == '__main__':
+    app.run(debug=True)
