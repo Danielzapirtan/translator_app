@@ -1,18 +1,82 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>English to Romanian Translator</title>
+  <meta charset="UTF-8">
+  <title>English to Romanian Translator</title>
+  <!-- Bootstrap CDN for improved UX -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #f8f9fa;
+      padding-top: 50px;
+    }
+    .container {
+      max-width: 800px;
+    }
+    .card {
+      margin-top: 20px;
+    }
+    .download-btn {
+      margin-top: 15px;
+    }
+  </style>
 </head>
 <body>
-    <h1>English to Romanian Translator</h1>
-    <form method="POST">
-        <textarea name="text" placeholder="Enter English text" rows="6" cols="40">{{ original_text }}</textarea><br>
-        <input type="submit" value="Translate">
-    </form>
-    {% if translation %}
-        <h2>Translation:</h2>
-        <p>{{ translation.text }}</p>
+  <div class="container">
+    <h1 class="mb-4 text-center">English to Romanian Translator</h1>
+    
+    {% if error %}
+      <div class="alert alert-danger">{{ error }}</div>
     {% endif %}
+    
+    <div class="card">
+      <div class="card-body">
+        <form method="POST" enctype="multipart/form-data">
+          <div class="mb-3">
+            <label for="fileInput" class="form-label">Upload a TXT file:</label>
+            <input class="form-control" type="file" id="fileInput" name="file" accept=".txt" required>
+          </div>
+          <button type="submit" class="btn btn-primary">Translate</button>
+        </form>
+      </div>
+    </div>
+    
+    {% if translation %}
+      <div class="card">
+        <div class="card-header">
+          Original Text
+        </div>
+        <div class="card-body">
+          <pre>{{ original_text }}</pre>
+        </div>
+      </div>
+      
+      <div class="card">
+        <div class="card-header">
+          Romanian Translation
+        </div>
+        <div class="card-body">
+          <pre id="translation-output">{{ translation }}</pre>
+          <!-- Download button -->
+          <a id="download-btn" class="btn btn-success download-btn" download="translation.txt" href="#">Download Translation</a>
+        </div>
+      </div>
+    {% endif %}
+  </div>
+
+  <!-- Bootstrap JS (optional) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  
+  <!-- JavaScript to generate downloadable file from the translation -->
+  {% if translation %}
+  <script>
+    document.getElementById('download-btn').addEventListener('click', function() {
+      const translationText = document.getElementById('translation-output').innerText;
+      const blob = new Blob([translationText], { type: 'text/plain' });
+      const url = window.URL.createObjectURL(blob);
+      this.href = url;
+    });
+  </script>
+  {% endif %}
 </body>
 </html>
