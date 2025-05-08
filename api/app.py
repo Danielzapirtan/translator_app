@@ -1,20 +1,33 @@
 import os
 from flask import Flask, render_template, request
-from googletrans import Translator
+from deep_translator import GoogleTranslator
 
 app = Flask(__name__, template_folder='templates')
-translator = Translator()
 
 @app.route('/', methods=['GET', 'POST'])
 def translate_text():
     translation = None
-    original_text = ''
+    original_text = ""
+    error = None
     if request.method == 'POST':
-        original_text = request.form.get('text', '')
-        if original_text:
-            # Translate from English ('en') to Romanian ('ro')
-            translation = translator.translate(original_text, src='en', dest='ro')
-    return render_template('index.html', translation=translation, original_text=original_text)
+        if 'file' in request.files:
+            file = request.files['file']
+            if file.filename == "":
+                error = "No file selected."
+            else:
+                try:
+                    # Ensure it's a TXT file (additional check)
+                    if not file.filename.lower().endswith('.txt'):
+                        error = "Only TXT files are allowed."
+                    else:
+                        original_text = file.read().decode("utf-8")
+                        # Translate the entire content from English to Romanian
+                        translation = GoogleTranslator(source='en', target='ro').translate(original_text)
+                except Exception as e:
+                    error = f"An error occurred: {str(e)}"
+        else:
+            error = "File not provided."
+    return render_template('index.html', translation=translation, original_text=original_text, error=error)
 
 if __name__ == '__main__':
     port = int(os.environ.get("PORT", 5000))
