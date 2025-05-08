@@ -1,20 +1,21 @@
-import gradio as gr
-from deep_translator import GoogleTranslator
+import os
+from flask import Flask, render_template, request
+from googletrans import Translator
 
-def translate_file(file):
-    with open(file.name, "r", encoding="utf-8") as f:
-        text = f.read()
-    
-    translator = GoogleTranslator(source="english", target="romanian")
-    translated_text = translator.translate(text)
-    
-    return translated_text
+app = Flask(__name__, template_folder='templates')
+translator = Translator()
 
-iface = gr.Interface(
-    fn=translate_file,
-    inputs=gr.File(label="Upload a TXT file"),
-    outputs=gr.Textbox(label="Translated Text"),
-    title="TXT File Translator - English to Romanian"
-)
+@app.route('/', methods=['GET', 'POST'])
+def translate_text():
+    translation = None
+    original_text = ''
+    if request.method == 'POST':
+        original_text = request.form.get('text', '')
+        if original_text:
+            # Translate from English ('en') to Romanian ('ro')
+            translation = translator.translate(original_text, src='en', dest='ro')
+    return render_template('index.html', translation=translation, original_text=original_text)
 
-iface.launch()
+if __name__ == '__main__':
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host='0.0.0.0', port=port)
