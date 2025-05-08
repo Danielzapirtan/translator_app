@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>English to Romanian Translator</title>
+</head>
+<body>
+    <h1>English to Romanian Translator</h1>
+    <form method="POST">
+        <textarea name="text" placeholder="Enter English text" rows="6" cols="40">{{ original_text }}</textarea><br>
+        <input type="submit" value="Translate">
+    </form>
+    {% if translation %}
+        <h2>Translation:</h2>
+        <p>{{ translation.text }}</p>
+    {% endif %}
+</body>
+</html>
