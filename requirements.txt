@@ -1,2 +1,2 @@
-gradio
-deep-translator
+Flask==2.2.5
+googletrans==4.0.0-rc1
