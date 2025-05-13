@@ -15,18 +15,7 @@ def translate_text():
             if file.filename == "":
                 error = "No file selected."
             else:
- try:
-    file = request.files.get('file')
-    if not file or not file.filename.lower().endswith('.txt'):
-        error = "Only TXT files are allowed."
-    else:
-        original_text = file.read().decode(errors="ignore")  # More flexible decoding
-        try:
-            translation = GoogleTranslator(source='en', target='ro').translate(original_text)
-        except Exception as e:
-            error = f"Translation failed: {str(e)}"
-except Exception as e:
-    error = f"An unexpected error occurred: {str(e)}"                try:
+                try:
                     # Ensure it's a TXT file (additional check)
                     if not file.filename.lower().endswith('.txt'):
                         error = "Only TXT files are allowed."
