@@ -1,2 +1,3 @@
 Flask==2.2.5
 deep-translator==1.8.1
+gunicorn
