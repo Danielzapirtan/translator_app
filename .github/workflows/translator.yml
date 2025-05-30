@@ -47,10 +47,7 @@ jobs:
           with open('input.txt', 'r') as f:
               text = f.read()
 
-          # Split at sentence boundaries when possible
           chunks = [text[i:i+chunk_size] for i in range(0, len(text), chunk_size)]
-
-#          chunks = re.findall(f'.{{1,{CHUNK_SIZE}}}(?<=\\s|$)|.{{1,{CHUNK_SIZE}}}', text)
 
           translated = []
           for chunk in tqdm(chunks, desc='Translating'):
