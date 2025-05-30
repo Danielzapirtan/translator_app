@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
     inputs:
       chunk_size:
-        description: 'Characters per chunk (default: 5000)'
+        description: 'Characters per chunk (default: 4000)'
         default: '4000'
         required: false
 
@@ -39,7 +39,7 @@ jobs:
           python3 -c "
           from deep_translator import GoogleTranslator
           from tqdm import tqdm
-          CHUNK_SIZE = ${{ github.event.inputs.chunk_size || 5000 }}
+          CHUNK_SIZE = ${{ github.event.inputs.chunk_size || 4000 }}
           translator = GoogleTranslator(source='en', target='ro')
 
           with open('input.txt', 'r') as f:
@@ -52,7 +52,7 @@ jobs:
               try:
                   translated.append(translator.translate(chunk))
               except Exception as e:
-                  print(f'::error::Chunk failed: {str(e)}')
+                  #print(f'::error::Chunk failed: {str(e)}')
                   translated.append(f'[TRANSLATION ERROR] {chunk}')
 
           with open('translated.txt', 'w') as f:
