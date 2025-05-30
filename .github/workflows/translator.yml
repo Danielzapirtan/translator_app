@@ -38,9 +38,6 @@ jobs:
         run: |
           python3 -c "
           from deep_translator import GoogleTranslator
-          from tqdm import tqdm
-          import re
-
           CHUNK_SIZE = ${{ inputs.chunk_size }}
           translator = GoogleTranslator(source='en', target='ro')
 
