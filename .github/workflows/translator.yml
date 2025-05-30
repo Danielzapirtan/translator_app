@@ -4,7 +4,7 @@ on:
     inputs:
       chunk_size:
         description: 'Characters per chunk (default: 5000)'
-        default: '5000'
+        default: '4000'
         required: false
 
 jobs:
