@@ -21,7 +21,7 @@ jobs:
             exit 1
           fi
           FILESIZE=$(wc -c <"input.txt")
-          if [ $FILESIZE -gt 10485760 ]; then  # 10MB
+          if [ "$FILESIZE" -gt 10485760 ]; then  # 10MB
             echo "::error::File exceeds 10MB limit"
             exit 1
           fi
@@ -38,7 +38,8 @@ jobs:
         run: |
           python3 -c "
           from deep_translator import GoogleTranslator
-          CHUNK_SIZE = ${{ inputs.chunk_size }}
+          from tqdm import tqdm
+          CHUNK_SIZE = ${{ github.event.inputs.chunk_size || 5000 }}
           translator = GoogleTranslator(source='en', target='ro')
 
           with open('input.txt', 'r') as f:
@@ -47,7 +48,7 @@ jobs:
           chunks = [text[i:i+CHUNK_SIZE] for i in range(0, len(text), CHUNK_SIZE)]
 
           translated = []
-          for chunk in chunks: 
+          for chunk in tqdm(chunks):
               try:
                   translated.append(translator.translate(chunk))
               except Exception as e:
