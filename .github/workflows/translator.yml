@@ -47,7 +47,7 @@ jobs:
           with open('input.txt', 'r') as f:
               text = f.read()
 
-          chunks = [text[i:i+chunk_size] for i in range(0, len(text), chunk_size)]
+          chunks = [text[i:i+CHUNK_SIZE] for i in range(0, len(text), CHUNK_SIZE)]
 
           translated = []
           for chunk in tqdm(chunks, desc='Translating'):
