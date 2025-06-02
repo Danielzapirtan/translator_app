@@ -33,7 +33,7 @@ jobs:
           CHUNK_SIZE = ${{ github.event.inputs.chunk_size || 4000 }}
           translator = GoogleTranslator(source='en', target='ro')
 
-          text = '''"${{ github.event.inputs.text_to_translate }}"'''
+          text = '''${{ github.event.inputs.text_to_translate }}'''
 
           chunks = [text[i:i+CHUNK_SIZE] for i in range(0, len(text), CHUNK_SIZE)]
 
