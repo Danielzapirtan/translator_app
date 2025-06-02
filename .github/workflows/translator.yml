@@ -25,15 +25,24 @@ jobs:
       - name: Install dependencies
         run: pip install deep-translator tqdm
 
+      - name: Write input to file
+        run: |
+          cat << 'EOF' > input.txt
+          ${{ github.event.inputs.text_to_translate }}
+          EOF
+
       - name: Chunked translation
         run: |
           python3 -c "
           from deep_translator import GoogleTranslator
           from tqdm import tqdm
-          CHUNK_SIZE = ${{ github.event.inputs.chunk_size || 4000 }}
+          import os
+
+          CHUNK_SIZE = int(os.environ.get('CHUNK_SIZE', 4000))
           translator = GoogleTranslator(source='en', target='ro')
 
-          text = '''${{ github.event.inputs.text_to_translate }}'''
+          with open('input.txt', 'r') as f:
+              text = f.read()
 
           chunks = [text[i:i+CHUNK_SIZE] for i in range(0, len(text), CHUNK_SIZE)]
 
@@ -48,6 +57,8 @@ jobs:
           with open('translated.txt', 'w') as f:
               f.write(''.join(translated))
           "
+        env:
+          CHUNK_SIZE: ${{ github.event.inputs.chunk_size || 4000 }}
 
       - name: Upload result
         uses: actions/upload-artifact@v4
