@@ -34,14 +34,11 @@ jobs:
           translator = GoogleTranslator(source='en', target='ro')
 
           text = '''${{ github.event.inputs.text_to_translate }}'''
-
           chunks = [text[i:i+CHUNK_SIZE] for i in range(0, len(text), CHUNK_SIZE)]
 
           translated = []
           for chunk in tqdm(chunks):
-                  translated.append(translator.translate(chunk))
-translated.append(f'[TRANSLATION ERROR] {chunk}')
-
+              translated.append(translator.translate(chunk))
           with open('translated.txt', 'w') as f:
               f.write(''.join(translated))
           "
