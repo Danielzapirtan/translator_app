@@ -1,7 +1,10 @@
-name: Large File Translator (EN→RO)
+name: Text Translator (EN→RO)
 on:
   workflow_dispatch:
     inputs:
+      text_to_translate:
+        description: 'Text to translate (English to Romanian)'
+        required: true
       chunk_size:
         description: 'Characters per chunk (default: 4000)'
         default: '4000'
@@ -16,13 +19,13 @@ jobs:
 
       - name: Validate input
         run: |
-          if [ ! -f "input.txt" ]; then
-            echo "::error::Missing input.txt file"
+          if [ -z "${{ github.event.inputs.text_to_translate }}" ]; then
+            echo "::error::No text provided for translation"
             exit 1
           fi
-          FILESIZE=$(wc -c <"input.txt")
-          if [ "$FILESIZE" -gt 10485760 ]; then  # 10MB
-            echo "::error::File exceeds 10MB limit"
+          TEXT_LENGTH=${#TEXT_TO_TRANSLATE}
+          if [ "$TEXT_LENGTH" -gt 10485760 ]; then  # 10MB
+            echo "::error::Text exceeds 10MB limit"
             exit 1
           fi
 
@@ -42,8 +45,7 @@ jobs:
           CHUNK_SIZE = ${{ github.event.inputs.chunk_size || 4000 }}
           translator = GoogleTranslator(source='en', target='ro')
 
-          with open('input.txt', 'r') as f:
-              text = f.read()
+          text = '''${{ github.event.inputs.text_to_translate }}'''
 
           chunks = [text[i:i+CHUNK_SIZE] for i in range(0, len(text), CHUNK_SIZE)]
 
