@@ -17,6 +17,18 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Validate input
+        run: |
+          if [ -z "${{ github.event.inputs.text_to_translate }}" ]; then
+            echo "::error::No text provided for translation"
+            exit 1
+          fi
+          TEXT_LENGTH=${#TEXT_TO_TRANSLATE}
+          if [ "$TEXT_LENGTH" -gt 10485760 ]; then  # 10MB
+            echo "::error::Text exceeds 10MB limit"
+            exit 1
+          fi
+
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
@@ -34,11 +46,17 @@ jobs:
           translator = GoogleTranslator(source='en', target='ro')
 
           text = '''${{ github.event.inputs.text_to_translate }}'''
+
           chunks = [text[i:i+CHUNK_SIZE] for i in range(0, len(text), CHUNK_SIZE)]
 
           translated = []
           for chunk in tqdm(chunks):
-              translated.append(translator.translate(chunk))
+              try:
+                  translated.append(translator.translate(chunk))
+              except Exception as e:
+                  #print(f'::error::Chunk failed: {str(e)}')
+                  translated.append(f'[TRANSLATION ERROR] {chunk}')
+
           with open('translated.txt', 'w') as f:
               f.write(''.join(translated))
           "
