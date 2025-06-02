@@ -19,7 +19,7 @@ jobs:
 
       - name: Validate input
         run: |
-          if [ -z "${{ github.event.inputs.text_to_translate }}" ]; then
+          if [ x"${{ github.event.inputs.text_to_translate }}" = x ]; then
             echo "::error::No text provided for translation"
             exit 1
           fi
