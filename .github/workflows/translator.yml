@@ -23,11 +23,6 @@ jobs:
             echo "::error::No text provided for translation"
             exit 1
           fi
-          TEXT_LENGTH=${#TEXT_TO_TRANSLATE}
-          if [ "$TEXT_LENGTH" -gt 10485760 ]; then  # 10MB
-            echo "::error::Text exceeds 10MB limit"
-            exit 1
-          fi
 
       - name: Set up Python
         uses: actions/setup-python@v4
