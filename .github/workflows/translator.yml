@@ -23,11 +23,11 @@ jobs:
             echo "::error::No text provided for translation"
             exit 1
           fi
-          TEXT_LENGTH=$(echo "${{ github.event.inputs.text_to_translate }}" | wc -c)
-          if [ "$TEXT_LENGTH" -gt 10485760 ]; then  # 10MB
-            echo "::error::Text exceeds 10MB limit"
-            exit 1
-          fi
+#          TEXT_LENGTH=$(echo "${{ github.event.inputs.text_to_translate }}" | wc -c)
+#          if [ "$TEXT_LENGTH" -gt 10485760 ]; then  # 10MB
+#            echo "::error::Text exceeds 10MB limit"
+#            exit 1
+#          fi
 
       - name: Set up Python
         uses: actions/setup-python@v4
