@@ -17,13 +17,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Validate input
-        run: |
-          if [ -z "${{ github.event.inputs.text_to_translate }}" ]; then
-            echo "::error::No text provided for translation"
-            exit 1
-          fi
-
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
