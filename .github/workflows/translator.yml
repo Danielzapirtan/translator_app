@@ -39,11 +39,8 @@ jobs:
 
           translated = []
           for chunk in tqdm(chunks):
-              try:
                   translated.append(translator.translate(chunk))
-              except Exception as e:
-                  #print(f'::error::Chunk failed: {str(e)}')
-                  translated.append(f'[TRANSLATION ERROR] {chunk}')
+translated.append(f'[TRANSLATION ERROR] {chunk}')
 
           with open('translated.txt', 'w') as f:
               f.write(''.join(translated))
