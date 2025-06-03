@@ -35,9 +35,9 @@ jobs:
 
       - name: Write input text to file
         run: |
-          cat - <<END >input.txt
+          cat <<END >input.txt
 "${{ github.event.inputs.english_text }}"
-          END
+END
         shell: bash # Ensure bash shell is used for 'echo' to handle special characters correctly
 
       - name: Create and run translation script
