@@ -1,69 +1,50 @@
-name: Large File Translator (EN→RO)
-on:
+name: MarianMT Translator
+on: 
   workflow_dispatch:
     inputs:
-      chunk_size:
-        description: 'Characters per chunk (default: 5000)'
-        default: '5000'
+      text:
+        description: "Text to translate (English)"
+        required: true
+        default: "Hello world"
+      target_lang:
+        description: "Target language code (e.g., 'ro')"
         required: false
+        default: "ro"
 
 jobs:
   translate:
     runs-on: ubuntu-latest
-    timeout-minutes: 360  # 6-hour max (free tier)
     steps:
       - uses: actions/checkout@v4
-
-      - name: Validate input
-        run: |
-          if [ ! -f "input.txt" ]; then
-            echo "::error::Missing input.txt file"
-            exit 1
-          fi
-          FILESIZE=$(wc -c <"input.txt")
-          if [ $FILESIZE -gt 10485760 ]; then  # 10MB
-            echo "::error::File exceeds 10MB limit"
-            exit 1
-          fi
 
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.10'
+          python-version: "3.10"
+
+      - name: Cache Hugging Face models
+        uses: actions/cache@v3
+        with:
+          path: ~/.cache/huggingface
+          key: hf-models
 
       - name: Install dependencies
-        run: pip install deep-translator tqdm
-
-      - name: Chunked translation
         run: |
-          python3 -c "
-          from deep_translator import GoogleTranslator
-          from tqdm import tqdm
-          import re
+          pip install torch transformers sentencepiece
 
-          CHUNK_SIZE = ${{ inputs.chunk_size }}
-          translator = GoogleTranslator(source='en', target='ro')
-
-          with open('input.txt', 'r') as f:
-              text = f.read()
-
-          # Split at sentence boundaries when possible
-          chunks = re.findall(f'.{{1,{CHUNK_SIZE}}}(?<=\\s|$)|.{{1,{CHUNK_SIZE}}}', text)
-
-          translated = []
-          for chunk in tqdm(chunks, desc='Translating'):
-              try:
-                  translated.append(translator.translate(chunk))
-              except Exception as e:
-                  print(f'::error::Chunk failed: {str(e)}')
-                  translated.append(f'[TRANSLATION ERROR] {chunk}')
-
-          with open('translated.txt', 'w') as f:
-              f.write(''.join(translated))
+      - name: Translate
+        run: |
+          python -c "
+from transformers import MarianMTModel, MarianTokenizer
+text = '''${{ inputs.text }}'''
+model_name = f'Helsinki-NLP/opus-mt-en-${{ inputs.target_lang }}'
+try:
+    tokenizer = MarianTokenizer.from_pretrained(model_name)
+    model = MarianMTModel.from_pretrained(model_name)
+    inputs = tokenizer(text, return_tensors='pt', truncation=True)
+    translated = model.generate(**inputs)
+    print(tokenizer.decode(translated[0], skip_special_tokens=True))
+except Exception as e:
+    print(f'::error::Failed: {e}')
+    exit(1)
           "
-
-      - name: Upload result
-        uses: actions/upload-artifact@v3
-        with:
-          name: translated_result
-          path: translated.txt
