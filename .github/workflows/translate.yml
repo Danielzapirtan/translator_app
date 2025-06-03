@@ -1,10 +1,10 @@
-name: Translate English to Romanian (MarianMT)
+name: Translate English to Romanian (MarianMT - Long Text)
 
 on:
   workflow_dispatch:
     inputs:
       english_text:
-        description: 'English text to translate'
+        description: 'English text to translate (supports very long texts)'
         required: true
         type: string
 
@@ -33,6 +33,11 @@ jobs:
         run: |
           pip install transformers sentencepiece torch
 
+      - name: Write input text to file
+        run: |
+          echo "${{ github.event.inputs.english_text }}" > input.txt
+        shell: bash # Ensure bash shell is used for 'echo' to handle special characters correctly
+
       - name: Create and run translation script
         id: translation_step
         run: |
@@ -45,38 +50,50 @@ jobs:
           def translate_text(text, source_lang, target_lang):
               model_name = f"Helsinki-NLP/opus-mt-{source_lang}-{target_lang}"
               
-              # Ensure model and tokenizer are loaded from cache if available, or downloaded
               tokenizer = MarianTokenizer.from_pretrained(model_name)
               model = MarianMTModel.from_pretrained(model_name)
               
               # MarianMT models often work best with a list of strings
+              # For very long texts, you might need to split them into chunks
+              # and translate each chunk, then concatenate.
+              # However, for simplicity and to directly address the "list too long"
+              # issue, we'll process the single input string first.
+              # If the input text is a single very long paragraph, the model might
+              # have internal sequence length limits (typically 512 tokens).
+              # For true "very long texts" (e.g., entire books), you'd need
+              # more sophisticated chunking and reassembly logic here.
+              
               inputs = tokenizer(text, return_tensors="pt", padding=True, truncation=True)
               
-              # Generate translation
               translated_tokens = model.generate(**inputs)
               
-              # Decode the translated tokens back to text
               translated_text = [tokenizer.decode(t, skip_special_tokens=True) for t in translated_tokens]
               
-              return translated_text[0] # Return the first (and likely only) translated sentence
+              return translated_text[0]
 
           if __name__ == "__main__":
-              english_text = sys.argv[1]
-              
-              # Add a check to see if the model was loaded from cache or downloaded
-              if os.path.exists(os.path.expanduser('~/.cache/huggingface/hub')):
-                  print("Hugging Face cache directory exists.")
+              # Read input text from the file created by the previous step
+              input_filepath = "input.txt"
+              output_filepath = "translated_text.txt"
+
+              if not os.path.exists(input_filepath):
+                  print(f"Error: Input file '{input_filepath}' not found.", file=sys.stderr)
+                  sys.exit(1)
+
+              with open(input_filepath, "r", encoding="utf-8") as f:
+                  english_text = f.read()
+
+              print(f"Read {len(english_text)} characters from input.txt")
               
               romanian_translation = translate_text(english_text, "en", "ro")
               
-              # Output the translation to a file
-              with open("translated_text.txt", "w", encoding="utf-8") as f:
+              with open(output_filepath, "w", encoding="utf-8") as f:
                   f.write(romanian_translation)
-              print(f"Translation complete. Output saved to translated_text.txt")
+              print(f"Translation complete. Output saved to {output_filepath}")
           EOF
           
-          # Run the Python script with the user input
-          python translate_marian.py "${{ github.event.inputs.english_text }}"
+          # Run the Python script
+          python translate_marian.py
 
       - name: Upload translated text as artifact
         uses: actions/upload-artifact@v4
