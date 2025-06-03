@@ -24,10 +24,10 @@ jobs:
         id: cache-models
         uses: actions/cache@v4
         with:
-          path: ~/.cache/huggingface/hub # Default cache directory for Hugging Face models
-          key: ${{ runner.os }}-huggingface-models-en-ro-v1 # Unique key for the cache
+          path: ~/.cache/huggingface/hub
+          key: ${{ runner.os }}-huggingface-models-en-ro-v1
           restore-keys: |
-            ${{ runner.os }}-huggingface-models-en-ro- # Fallback if specific version not found
+            ${{ runner.os }}-huggingface-models-en-ro-
 
       - name: Install dependencies
         run: |
@@ -36,43 +36,57 @@ jobs:
       - name: Write input text to file
         run: |
           echo "${{ github.event.inputs.english_text }}" > input.txt
-        shell: bash # Ensure bash shell is used for 'echo' to handle special characters correctly
 
       - name: Create and run translation script
         id: translation_step
         run: |
-          # Create a Python script inline
           cat <<EOF > translate_marian.py
           from transformers import MarianMTModel, MarianTokenizer
           import sys
           import os
+          import re
+
+          def split_text(text, max_chunk_size=500):
+              """Split text into chunks of sentences with maximum chunk size."""
+              sentences = re.split(r'(?<=[.!?])\s+', text)
+              chunks = []
+              current_chunk = ""
+              
+              for sentence in sentences:
+                  if len(current_chunk) + len(sentence) <= max_chunk_size:
+                      current_chunk += " " + sentence if current_chunk else sentence
+                  else:
+                      if current_chunk:
+                          chunks.append(current_chunk)
+                      current_chunk = sentence
+              
+              if current_chunk:
+                  chunks.append(current_chunk)
+              
+              return chunks
 
           def translate_text(text, source_lang, target_lang):
               model_name = f"Helsinki-NLP/opus-mt-{source_lang}-{target_lang}"
-              
               tokenizer = MarianTokenizer.from_pretrained(model_name)
               model = MarianMTModel.from_pretrained(model_name)
               
-              # MarianMT models often work best with a list of strings
-              # For very long texts, you might need to split them into chunks
-              # and translate each chunk, then concatenate.
-              # However, for simplicity and to directly address the "list too long"
-              # issue, we'll process the single input string first.
-              # If the input text is a single very long paragraph, the model might
-              # have internal sequence length limits (typically 512 tokens).
-              # For true "very long texts" (e.g., entire books), you'd need
-              # more sophisticated chunking and reassembly logic here.
+              # Split text into manageable chunks
+              chunks = split_text(text)
+              translated_chunks = []
               
-              inputs = tokenizer(text, return_tensors="pt", padding=True, truncation=True)
+              for chunk in chunks:
+                  try:
+                      inputs = tokenizer(chunk, return_tensors="pt", truncation=True, max_length=512)
+                      translated_tokens = model.generate(**inputs)
+                      translated_chunk = tokenizer.decode(translated_tokens[0], skip_special_tokens=True)
+                      translated_chunks.append(translated_chunk)
+                  except Exception as e:
+                      print(f"Error translating chunk: {str(e)}", file=sys.stderr)
+                      translated_chunks.append("[TRANSLATION ERROR]")
               
-              translated_tokens = model.generate(**inputs)
-              
-              translated_text = [tokenizer.decode(t, skip_special_tokens=True) for t in translated_tokens]
-              
-              return translated_text[0]
+              return " ".join(translated_chunks)
 
           if __name__ == "__main__":
-              # Read input text from the file created by the previous step
               input_filepath = "input.txt"
               output_filepath = "translated_text.txt"
 
@@ -85,14 +99,19 @@ jobs:
 
               print(f"Read {len(english_text)} characters from input.txt")
               
-              romanian_translation = translate_text(english_text, "en", "ro")
+              if len(english_text) > 1000000:
+                  print("Warning: Very large input text may cause memory issues", file=sys.stderr)
               
-              with open(output_filepath, "w", encoding="utf-8") as f:
-                  f.write(romanian_translation)
-              print(f"Translation complete. Output saved to {output_filepath}")
+              try:
+                  romanian_translation = translate_text(english_text, "en", "ro")
+                  with open(output_filepath, "w", encoding="utf-8") as f:
+                      f.write(romanian_translation)
+                  print(f"Translation complete. Output saved to {output_filepath}")
+              except Exception as e:
+                  print(f"Translation failed: {str(e)}", file=sys.stderr)
+                  sys.exit(1)
           EOF
           
-          # Run the Python script
           python translate_marian.py
 
       - name: Upload translated text as artifact
@@ -101,8 +120,9 @@ jobs:
           name: romanian-translation
           path: translated_text.txt
 
-      - name: Display translated text (for immediate feedback in logs)
+      - name: Display translated text
         run: |
           echo "--- Translated Text ---"
-          cat translated_text.txt
+          head -c 1000 translated_text.txt  # Show first 1000 chars to avoid huge logs
+          echo "..."
           echo "-----------------------"
