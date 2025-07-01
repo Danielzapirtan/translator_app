@@ -1,1 +1,5 @@
-pip install gradio transformers torch sentencepiece sacremoses
+gradio
+transformers
+torch
+sentencepiece
+sacremoses
