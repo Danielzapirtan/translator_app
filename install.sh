@@ -26,7 +26,7 @@ pip install -r requirements.txt
 
 # Start the application
 echo "🚀 Starting translator app..."
-python3 app.py &>/dev/null &
+python3 translator_app.py &>/dev/null &
 
 # Give it a moment to start
 sleep 3
@@ -34,4 +34,4 @@ sleep 3
 echo ""
 echo "✅ Installation complete!"
 echo "🌐 Visit http://localhost:7860 in your browser"
-echo "💡 To restart later, run: cd ~/translator_app && python3 app.py &"
+echo "💡 To restart later, run: cd ~/translator_app && python3 translator_app.py &"
