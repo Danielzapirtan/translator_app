@@ -13,7 +13,7 @@ sudo apt install -y git python3-pip
 # Clone repository
 echo "📥 Downloading translation_app..."
 if [ -d "translator_app" ]; then
-    echo "⚠️  Warehouse directory exists, removing old version..."
+    echo "⚠️  translator_app directory exists, removing old version..."
     rm -rf translator_app
 fi
 git clone https://github.com/Danielzapirtan/translator_app.git
