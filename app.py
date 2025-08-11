@@ -1,87 +1,73 @@
 #!/usr/bin/env python3
 """
-LibreTranslate English-to-Romanian Translator on Google Colab
-- Self-hosts LibreTranslate in Docker
-- Translates uploaded .txt files
-- Saves translations to new files
+English-to-Romanian File Translator
+Uses LibreTranslate's public API (no Docker required)
 """
 
 import os
-import time
 import requests
-from IPython.display import clear_output
+from pathlib import Path
 
-def install_and_launch_libretranslate():
-    """Install Docker and launch LibreTranslate container"""
-    print("⚙️ Setting up LibreTranslate server...")
-    
-    # Install Docker
-    !sudo apt-get update -qq > /dev/null
-    !sudo apt-get install -y -qq docker.io > /dev/null
-    !sudo systemctl start docker
-    
-    # Launch LibreTranslate
-    !sudo docker pull -q libretranslate/libretranslate
-    !sudo docker run -d -p 5000:5000 libretranslate/libretranslate --free-api > /dev/null
-    
-    # Wait for server to start
-    time.sleep(10)
-    clear_output()
-    print("✅ LibreTranslate server is running at http://localhost:5000")
+# Configuration
+LIBRETRANSLATE_URL = "https://libretranslate.com"
+SOURCE_LANG = "en"
+TARGET_LANG = "ro"
+MAX_CHARS = 5000  # LibreTranslate public API limit
 
-def translate_text(text, source_lang="en", target_lang="ro"):
-    """Translate text using local LibreTranslate API"""
-    url = "http://localhost:5000/translate"
+def translate_text(text: str) -> str:
+    """Translate text using LibreTranslate API"""
+    endpoint = f"{LIBRETRANSLATE_URL}/translate"
     payload = {
         "q": text,
-        "source": source_lang,
-        "target": target_lang,
+        "source": SOURCE_LANG,
+        "target": TARGET_LANG,
         "format": "text"
     }
+    
     try:
-        response = requests.post(url, json=payload).json()
-        return response.get("translatedText", "Translation failed")
-    except:
-        return "Error connecting to translation server"
+        response = requests.post(endpoint, json=payload)
+        response.raise_for_status()
+        return response.json().get("translatedText", "Translation failed")
+    except requests.exceptions.RequestException as e:
+        return f"API Error: {str(e)}"
 
-def process_files():
-    """Main workflow: file selection and translation"""
-    print("\n📝 English to Romanian Text File Translator")
-    print("----------------------------------------")
-    
-    # Get input file (Colab uploads to /content/)
-    input_path = input("Enter English text filename (e.g., 'my_text.txt'): ").strip()
-    if not os.path.exists(input_path):
-        print(f"❌ Error: File '{input_path}' not found in /content/")
-        print("Please upload your file first using Colab's file explorer")
-        return
-    
-    # Read input file
-    with open(input_path, 'r', encoding='utf-8') as f:
-        english_text = f.read()
-    
-    if not english_text.strip():
-        print("❌ Error: File is empty")
-        return
-    
-    print(f"\n🔤 Original text ({len(english_text)} chars):")
-    print("----------------------------------------")
-    print(english_text[:200] + ("..." if len(english_text) > 200 else ""))
-    
-    # Translate
-    print("\n🔄 Translating to Romanian...")
-    romanian_text = translate_text(english_text)
-    
-    # Save output
-    output_path = f"translated_{os.path.basename(input_path)}"
-    with open(output_path, 'w', encoding='utf-8') as f:
-        f.write(romanian_text)
-    
-    print(f"\n✅ Translation saved to: {output_path}")
-    print("----------------------------------------")
-    print(romanian_text[:200] + ("..." if len(romanian_text) > 200 else ""))
+def process_file(input_path: str, output_path: str) -> None:
+    """Handle file translation workflow"""
+    try:
+        # Read input
+        with open(input_path, 'r', encoding='utf-8') as f:
+            text = f.read().strip()
+        
+        if not text:
+            raise ValueError("File is empty")
+        
+        # Check length limit
+        if len(text) > MAX_CHARS:
+            raise ValueError(f"Text exceeds {MAX_CHARS} character limit")
+        
+        # Translate
+        print(f"Translating {len(text)} characters...")
+        translated = translate_text(text)
+        
+        # Write output
+        with open(output_path, 'w', encoding='utf-8') as f:
+            f.write(translated)
+        
+        print(f"Success! Translation saved to {output_path}")
+        
+    except Exception as e:
+        print(f"Error: {str(e)}")
 
-# Main execution
+def main():
+    print("English to Romanian Text Translator")
+    print("----------------------------------")
+    
+    # Get file paths
+    input_file = input("Enter input file path: ").strip()
+    output_file = f"translated_{Path(input_file).name}"
+    
+    # Run translation
+    process_file(input_file, output_file)
+
 if __name__ == "__main__":
-    install_and_launch_libretranslate()
-    process_files()
+    main()
