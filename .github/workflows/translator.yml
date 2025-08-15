@@ -61,28 +61,6 @@ jobs:
           echo "Available languages:"
           curl -s http://localhost:5000/languages | python -m json.tool
 
-      - name: Create en.txt if it doesn't exist
-        run: |
-          if [ ! -f en.txt ]; then
-            echo "Creating sample en.txt file..."
-            cat > en.txt << 'EOF'
-Hello, this is a sample text file for translation.
-
-This application demonstrates how to translate English text to Romanian using LibreTranslate.
-
-The translation service runs in a Docker container and provides a REST API for text translation.
-
-Features include:
-- Automatic text chunking for large files
-- Error handling and retry logic
-- Support for multiple file encodings
-- Progress tracking during translation
-
-Thank you for using this translation service!
-EOF
-            echo "Sample en.txt created."
-          fi
-
       - name: Show input file contents
         run: |
           echo "Contents of en.txt:"
