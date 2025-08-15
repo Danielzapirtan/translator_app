@@ -2,31 +2,11 @@ name: Translate Text File
 
 on:
   workflow_dispatch:  # Manual trigger
-  push:
-    paths:
-      - 'en.txt'  # Trigger when en.txt is updated
-    branches:
-      - main
 
 jobs:
   translate:
     runs-on: ubuntu-latest
     
-    services:
-      libretranslate:
-        image: libretranslate/libretranslate:latest
-        ports:
-          - 5000:5000
-        env:
-          LT_LOAD_ONLY: "en,ro"  # Only load English and Romanian models
-          LT_UPDATE_MODELS: true
-        options: >-
-          --health-cmd "curl -f http://localhost:5000/languages || exit 1"
-          --health-interval 30s
-          --health-timeout 10s
-          --health-retries 5
-          --health-start-period 60s
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -39,22 +19,15 @@ jobs:
       - name: Install Python dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install requests
+          pip install -r requirements.txt
 
       - name: Wait for LibreTranslate to be ready
         run: |
-          echo "Waiting for LibreTranslate service to be ready..."
-          for i in {1..30}; do
-            if curl -sf http://localhost:5000/languages; then
-              echo "LibreTranslate is ready!"
-              break
-            fi
-            echo "Attempt $i: LibreTranslate not ready yet, waiting 10 seconds..."
-            sleep 10
-          done
-          
+          libretranslate --host 0.0.0.0 --port 5000 --load-only en,ro &          
           # Verify service is working
-          curl -f http://localhost:5000/languages || (echo "LibreTranslate failed to start" && exit 1)
+          while true; do
+            curl -f http://localhost:5000/languages && break
+          done
 
       - name: Check available languages
         run: |
