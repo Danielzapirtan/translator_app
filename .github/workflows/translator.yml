@@ -79,7 +79,7 @@ jobs:
           - Progress tracking during translation
           
           Thank you for using this translation service!
-EOF
+            EOF
             echo "Sample en.txt created."
           fi
 
