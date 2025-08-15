@@ -29,11 +29,6 @@ jobs:
             curl -f http://localhost:5000/languages && break
           done
 
-      - name: Check available languages
-        run: |
-          echo "Available languages:"
-          curl -s http://localhost:5000/languages | python -m json.tool
-
       - name: Create en.txt if it doesn't exist
         run: |
           if [ ! -f en.txt ]; then
@@ -53,7 +48,7 @@ jobs:
       - name: Run translation
         run: |
           echo "Starting translation..."
-          python app.py en.txt -o ro.txt --server http://localhost:5000 --chunk-size 500
+          python app.py -o ro.txt en.txt
           
           echo "Translation completed. Output file contents:"
           echo "============================================"
