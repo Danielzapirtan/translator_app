@@ -1,67 +1,175 @@
-name: Text Translator (EN→RO)
+name: Translate Text File
+
 on:
-  workflow_dispatch:
-    inputs:
-      text_to_translate:
-        description: 'Text to translate (English to Romanian)'
-        required: true
-      chunk_size:
-        description: 'Characters per chunk (default: 4000)'
-        default: '4000'
-        required: false
+  workflow_dispatch:  # Manual trigger
+  push:
+    paths:
+      - 'en.txt'  # Trigger when en.txt is updated
+    branches:
+      - main
 
 jobs:
   translate:
     runs-on: ubuntu-latest
-    timeout-minutes: 360  # 6-hour max (free tier)
+    
+    services:
+      libretranslate:
+        image: libretranslate/libretranslate:latest
+        ports:
+          - 5000:5000
+        env:
+          LT_LOAD_ONLY: en,ro  # Only load English and Romanian models
+          LT_UPDATE_MODELS: true
+        options: >-
+          --health-cmd "curl -f http://localhost:5000/languages || exit 1"
+          --health-interval 30s
+          --health-timeout 10s
+          --health-retries 5
+          --health-start-period 60s
+
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.10'
+          python-version: '3.11'
 
-      - name: Install dependencies
-        run: pip install deep-translator tqdm
-
-      - name: Write input to file
+      - name: Install Python dependencies
         run: |
-          cat << 'EOF' > input.txt
-          ${{ github.event.inputs.text_to_translate }}
+          python -m pip install --upgrade pip
+          pip install requests
+
+      - name: Wait for LibreTranslate to be ready
+        run: |
+          echo "Waiting for LibreTranslate service to be ready..."
+          for i in {1..30}; do
+            if curl -sf http://localhost:5000/languages; then
+              echo "LibreTranslate is ready!"
+              break
+            fi
+            echo "Attempt $i: LibreTranslate not ready yet, waiting 10 seconds..."
+            sleep 10
+          done
+          
+          # Verify service is working
+          curl -f http://localhost:5000/languages || (echo "LibreTranslate failed to start" && exit 1)
+
+      - name: Check available languages
+        run: |
+          echo "Available languages:"
+          curl -s http://localhost:5000/languages | python -m json.tool
+
+      - name: Create en.txt if it doesn't exist
+        run: |
+          if [ ! -f en.txt ]; then
+            echo "Creating sample en.txt file..."
+            cat > en.txt << 'EOF'
+          Hello, this is a sample text file for translation.
+          
+          This application demonstrates how to translate English text to Romanian using LibreTranslate.
+          
+          The translation service runs in a Docker container and provides a REST API for text translation.
+          
+          Features include:
+          - Automatic text chunking for large files
+          - Error handling and retry logic
+          - Support for multiple file encodings
+          - Progress tracking during translation
+          
+          Thank you for using this translation service!
           EOF
+            echo "Sample en.txt created."
+          fi
 
-      - name: Chunked translation
+      - name: Show input file contents
         run: |
-          python3 -c "
-          from deep_translator import GoogleTranslator
-          from tqdm import tqdm
-          import os
+          echo "Contents of en.txt:"
+          echo "===================="
+          cat en.txt
+          echo "===================="
+          echo "File size: $(wc -c < en.txt) bytes"
 
-          CHUNK_SIZE = int(os.environ.get('CHUNK_SIZE', 4000))
-          translator = GoogleTranslator(source='en', target='ro')
+      - name: Run translation
+        run: |
+          echo "Starting translation..."
+          python app.py en.txt -o ro.txt --server http://localhost:5000 --chunk-size 500
+          
+          echo "Translation completed. Output file contents:"
+          echo "============================================"
+          cat ro.txt
+          echo "============================================"
 
-          with open('input.txt', 'r') as f:
-              text = f.read()
+      - name: Verify translation output
+        run: |
+          if [ -f ro.txt ]; then
+            echo "✓ Translation successful!"
+            echo "Input file size: $(wc -c < en.txt) bytes"
+            echo "Output file size: $(wc -c < ro.txt) bytes"
+            echo "Input lines: $(wc -l < en.txt)"
+            echo "Output lines: $(wc -l < ro.txt)"
+          else
+            echo "✗ Translation failed - ro.txt not found"
+            exit 1
+          fi
 
-          chunks = [text[i:i+CHUNK_SIZE] for i in range(0, len(text), CHUNK_SIZE)]
-
-          translated = []
-          for chunk in tqdm(chunks):
-              try:
-                  translated.append(translator.translate(chunk))
-              except Exception as e:
-                  #print(f'::error::Chunk failed: {str(e)}')
-                  translated.append(f'[TRANSLATION ERROR] {chunk}')
-
-          with open('translated.txt', 'w') as f:
-              f.write(''.join(translated))
-          "
-        env:
-          CHUNK_SIZE: ${{ github.event.inputs.chunk_size || 4000 }}
-
-      - name: Upload result
+      - name: Upload translation artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: translated_result
-          path: translated.txt
+          name: translated-files
+          path: |
+            en.txt
+            ro.txt
+          retention-days: 30
+
+      - name: Create translation summary
+        run: |
+          echo "# Translation Summary" > translation-summary.md
+          echo "" >> translation-summary.md
+          echo "**Date:** $(date)" >> translation-summary.md
+          echo "**Input file:** en.txt" >> translation-summary.md
+          echo "**Output file:** ro.txt" >> translation-summary.md
+          echo "**Input size:** $(wc -c < en.txt) bytes" >> translation-summary.md
+          echo "**Output size:** $(wc -c < ro.txt) bytes" >> translation-summary.md
+          echo "**Lines translated:** $(wc -l < en.txt)" >> translation-summary.md
+          echo "" >> translation-summary.md
+          echo "## Translation Preview" >> translation-summary.md
+          echo "" >> translation-summary.md
+          echo "### English (first 200 characters):" >> translation-summary.md
+          echo '```' >> translation-summary.md
+          head -c 200 en.txt >> translation-summary.md
+          echo "" >> translation-summary.md
+          echo '```' >> translation-summary.md
+          echo "" >> translation-summary.md
+          echo "### Romanian (first 200 characters):" >> translation-summary.md
+          echo '```' >> translation-summary.md
+          head -c 200 ro.txt >> translation-summary.md
+          echo "" >> translation-summary.md
+          echo '```' >> translation-summary.md
+
+      - name: Upload summary
+        uses: actions/upload-artifact@v4
+        with:
+          name: translation-summary
+          path: translation-summary.md
+          retention-days: 30
+
+      - name: Display job summary
+        run: |
+          echo "## 🌍 Translation Job Completed Successfully! 🎉" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| Metric | Value |" >> $GITHUB_STEP_SUMMARY
+          echo "|--------|-------|" >> $GITHUB_STEP_SUMMARY
+          echo "| Input file | \`en.txt\` |" >> $GITHUB_STEP_SUMMARY
+          echo "| Output file | \`ro.txt\` |" >> $GITHUB_STEP_SUMMARY
+          echo "| Input size | $(wc -c < en.txt) bytes |" >> $GITHUB_STEP_SUMMARY
+          echo "| Output size | $(wc -c < ro.txt) bytes |" >> $GITHUB_STEP_SUMMARY
+          echo "| Lines processed | $(wc -l < en.txt) |" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### 📁 Artifacts Generated:" >> $GITHUB_STEP_SUMMARY
+          echo "- **translated-files**: Contains both \`en.txt\` and \`ro.txt\`" >> $GITHUB_STEP_SUMMARY
+          echo "- **translation-summary**: Detailed markdown summary with preview" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### 🔗 Download Links:" >> $GITHUB_STEP_SUMMARY
+          echo "The translated files are available as workflow artifacts and can be downloaded from the Actions tab." >> $GITHUB_STEP_SUMMARY
