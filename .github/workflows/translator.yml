@@ -2,7 +2,6 @@ name: Translate Text File
 
 on:
   workflow_dispatch:  # Manual trigger
-  push:
     paths:
       - 'en.txt'  # Trigger when en.txt is updated
     branches:
