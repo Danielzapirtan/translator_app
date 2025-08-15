@@ -18,7 +18,7 @@ jobs:
         ports:
           - 5000:5000
         env:
-          LT_LOAD_ONLY: en,ro  # Only load English and Romanian models
+          LT_LOAD_ONLY: "en,ro"  # Only load English and Romanian models
           LT_UPDATE_MODELS: true
         options: >-
           --health-cmd "curl -f http://localhost:5000/languages || exit 1"
@@ -66,20 +66,20 @@ jobs:
           if [ ! -f en.txt ]; then
             echo "Creating sample en.txt file..."
             cat > en.txt << 'EOF'
-          Hello, this is a sample text file for translation.
-          
-          This application demonstrates how to translate English text to Romanian using LibreTranslate.
-          
-          The translation service runs in a Docker container and provides a REST API for text translation.
-          
-          Features include:
-          - Automatic text chunking for large files
-          - Error handling and retry logic
-          - Support for multiple file encodings
-          - Progress tracking during translation
-          
-          Thank you for using this translation service!
-            EOF
+Hello, this is a sample text file for translation.
+
+This application demonstrates how to translate English text to Romanian using LibreTranslate.
+
+The translation service runs in a Docker container and provides a REST API for text translation.
+
+Features include:
+- Automatic text chunking for large files
+- Error handling and retry logic
+- Support for multiple file encodings
+- Progress tracking during translation
+
+Thank you for using this translation service!
+EOF
             echo "Sample en.txt created."
           fi
 
