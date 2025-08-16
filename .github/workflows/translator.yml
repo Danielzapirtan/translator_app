@@ -65,6 +65,8 @@ jobs:
 
       - name: Run translation
         run: |
+          echo "Preprocessing file"
+          sh prep.sh
           echo "Starting translation..."
           python app.py -o ro.txt en.txt
           
