@@ -3,9 +3,8 @@
 int main(void) {
 	while (!feof(stdin)) {
 		int ch = getchar();
-		putchar(ch);
-		if (ch == '.')
-			putchar(10);
+		if (ch != 10)
+			putchar(ch);
 	}
 }
 
