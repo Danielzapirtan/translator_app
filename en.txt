@@ -46,7 +46,7 @@ B67L56 1993  616.
  It has been my pleasure to observe as Dr.
  Linehan refined her tech­ niques, making them increasingly comprehensive, specific, practical, and ap­ plicable to general mental health practice.
   The problem Dr.
- Linehan is addressing—borderline personality dis­ order—is an important and prevalent one that represents a great clinical puz­ zle.
+ Linehan is addressing—borderline personality disorder—is an important and prevalent one that represents a great clinical puz­ zle.
  These individuals suffer and cause suffering, often in the most poignant  and dramatic fashion.
  They constitute the most frequent personality disorder  encountered in clinical practice and have the highest rate of completed sui­ cide and of suicide attempts.
  Individuals meeting diagnostic criteria for bor­ derline personality disorder present a great treatment challenge.
@@ -56,11 +56,11 @@ B67L56 1993  616.
  They present, not infrequently, with a suicide  attempt or self-mutilation made in response to a real or imagined rejection  from their therapist (a vacation perhaps being the most common precipitant).
   They often tie the therapist in therapeutic knots so that every intervention  feels wrongheaded and cruel hearted.
  The treatments typically end in a huff,  and not infrequently in a hospitalization.
-  Clinicians are most likely to feel bewildered and deskilled by the border­ line individuals in their practice, and search for ways of dealing with them.
+  Clinicians are most likely to feel bewildered and deskilled by the borderline individuals in their practice, and search for ways of dealing with them.
   --- Page 7 --- vi Foreword  For some clinicians, the major hope has been the discovery of an effective  pharmacological intervention.
  The results to date have been decidedly mixed.
-  There is no specific pharmacological treatment for the instability of border­ line patients, and even the medications (neuroleptics, antidepressants, lith­ ium, carbomezapine) most effective for accompanying target symptoms have  their own side-effects and complications.
- Other clinicians have turned to psy­ chotherapeutic (particularly psychodynamic) strategies developed for border­ line individuals.
+  There is no specific pharmacological treatment for the instability of borderline patients, and even the medications (neuroleptics, antidepressants, lithium, carbomezapine) most effective for accompanying target symptoms have  their own side-effects and complications.
+ Other clinicians have turned to psy­ chotherapeutic (particularly psychodynamic) strategies developed for borderline individuals.
  But here, too, the results are quite mixed and the treatments  have many side-effects and complications of their own (particularly the trans- ference/countertransference reenactments described above).
  It is probably fair  to say that individuals with borderline personality disorder constitute the  toughest and most insoluble problem for the average clinician and the aver­ age clinic or inpatient facility.
  Everyone talks about borderline personality  disorder but it usually seems that no one knows quite what to do about it.
@@ -448,7 +448,7 @@ g.
  Although the particular constellation of  traits comprising the diagnostic entity was recognized much earlier, much of  the current interest in this population has resulted from its recently gained  official status.
  That status was not achieved without much controversy and  dispute.
  The "official" nomenclature and diagnostic criteria have been arrived  at both through political compromise and through attention to empirical  data.
-  Perhaps most controversial was the decision to use the word "border­ line" in the official designation of the disorder.
+  Perhaps most controversial was the decision to use the word "borderline" in the official designation of the disorder.
  The term itself has been popular  for many years in the psychoanalytic community.
  It was first used by Adolf  Stern in 1938 to describe a group of outpatients who did not profit from clas­ sical psychoanalysis and who did not seem to fit into the then-standard "neu­ rotic" or "psychotic" psychiatric categories.
  Psychopathology at that time was  conceptualized as occurring on a continuum from "normal" to "neurotic" to  "psychotic.
@@ -657,7 +657,7 @@ g.
   --- Page 29 --- 10 THEORY AND CONCEPTS  Interview for Borderlines —Revised (DIB-R) criteria, are listed in Table 1.
 2.
   A fourth approach to understanding borderline phenomena, based on  a biosocial learning theory, has been proposed by Millen (1981,1987a).
- Mil- Ion is one of the most articulate dissenters from the use of the term "border­ line" to describe this personality disorder.
+ Mil- Ion is one of the most articulate dissenters from the use of the term "borderline" to describe this personality disorder.
  Instead, Millen has suggested the  term "cycloid personality" to highlight the behavioral and mood instability  that he views as central to the disorder.
  From Millon's perspective, the bor­ derline personality pattern results from a deterioration of previous, less se­ vere personality patterns.
  Millen stresses the divergent background histories  found among borderline individuals, and suggests that BPD can be reached  via a number of pathways.
@@ -700,7 +700,7 @@ g.
  Emotional responses are highly reactive, and the individual generally  has difficulties with episodic depression, anxiety, and irritability, as well as  problems with anger and anger expression.
  Second, borderline individuals  often experience interpersonal dysregulation.
  Their relationships may be cha­ otic, intense, and marked with difficulties.
- Despite these problems, border­ line individuals often find it extremely hard to let go of relationships; instead,  they may engage in intense and frantic efforts to keep significant individuals  from leaving them.
+ Despite these problems, borderline individuals often find it extremely hard to let go of relationships; instead,  they may engage in intense and frantic efforts to keep significant individuals  from leaving them.
  In my experience, borderline individuals, more so than  most, seem to do well when in stable, positive relationships and to do poorly  when not in such relationships.
   Third, borderline individuals have patterns of behavioral dysregulation,  as evidenced by extreme and problematic impulsive behaviors as well as sui­ cidal behaviors.
  Attempts to injure, mutilate, or kill themselves are common  in this population.
@@ -790,7 +790,7 @@ g.
  Second, parasuicide is a less pejora­ tive term.
  It is difficult to like a person who has been labeled a "manipula­ tor.
 " The difficulties in treating these individuals make it particularly easy  to "blame the victims" and consequently to dislike them.
- Yet liking border­ line patients is correlated with helping them (Woollcott, 1985).
+ Yet liking borderline patients is correlated with helping them (Woollcott, 1985).
  This is a par­ ticularly salient issue, and 1 discuss it further in a moment.
   Research studies of parasuicide have typically employed a design in which  individuals with a history of parasuicidal behaviors are compared to other  individuals without such a history.
  Comparison groups might be other sui­ cidal groups, such as suicide completers or ideators; other, nonsuicidal psy­ chiatric patients; or nonpsychiatric control individuals.
@@ -822,7 +822,7 @@ g.
   Emotion Dysregulation: Depression  "Affective instability" in DSM-IV refers to marked reactivity of mood caus­ ing episodic depression, irritability, or anxiety, usually lasting a few hours  and only rarely more than a few days.
  The implication here is that the base- --- Page 35 --- 16 THEORY AND CONCEPTS  line mood is not particularly negative or depressed.
  In my experience with  parasuicidal borderline individuals, however, their baseline affective state is  generally extremely negative, at least with respect to depression.
- For exam­ ple, in a sample of 41 women at my clinic who met criteria for both BPD  and recent parasuicidal behavior, 71% met criteria for major affective dis­ order and 24% met criteria for dysthymia.
+ For exam­ ple, in a sample of 41 women at my clinic who met criteria for both BPD  and recent parasuicidal behavior, 71% met criteria for major affective disorder and 24% met criteria for dysthymia.
  In our most recent treatment study  (Linehan, Armstrong, Suarez, Allman, & Heard, 1991), my colleagues and  I were amazed at the apparent stability over a 1-year period of self-reports  of depression and hopelessness.
  Thus, the DIB-R with its emphasis on chronic  depression, hopelessness, worthlessness, guilt, and helplessness, seems to  characterize parasuicidal borderline individuals better than the DSM-IV does.
   Emotion Dysregulation: Anger  Both the DSM-IV and the DIB-R emphasize problems with anger dyscontrol  in borderline functioning.
@@ -840,7 +840,7 @@ g.
  863).
  Both definitions suggest that the manipulating individual intends to  influence another person by indirect, insidious, or devious means.
   Is this typical behavior of borderline individuals? In my own experience,  it has not been.
- Indeed, when they are trying to influence someone, border­ line individuals are typically direct, forceful, and, if anything, unartful.
+ Indeed, when they are trying to influence someone, borderline individuals are typically direct, forceful, and, if anything, unartful.
  It is  surely the case that borderline individuals do influence others.
  Often the most  --- Page 36 --- The Disorder: Concepts, Controversies, Definitions 17  influential behavior is parasuicide or the threat of impending suicide; at other  times, the behaviors that have the most influence are communications of in­ tense pain and agony, or current crises that the individuals cannot solve them- self.
  Such behaviors and communications, of course, are not by themselves  evidence of manipulation.
@@ -872,7 +872,7 @@ g.
   Or let us examine the term "needy.
 " It does not seem unreasonable for  a person in intense pain to present as a "needy supplicant.
 " Indeed, such a  stance may be essential if the person is to get what is needed to ameliorate  the current painful condition.
- This is especially the case when resources are  scarce in general, or when the applicant for help does not have sufficient  resources to "buy" the needed help —both of which are often true of border­ line individuals.
+ This is especially the case when resources are  scarce in general, or when the applicant for help does not have sufficient  resources to "buy" the needed help —both of which are often true of borderline individuals.
  We in the mental health community have few resources to  help them.
  What little help we can give them is limited by other obligations  and demands on our time and lives as individual caregivers.
  Often, what bor­ derline patients want the most—our time, attention, and care —are available  only in brief, rationed hours of the week.
@@ -1421,7 +1421,7 @@ g.
  "High  --- Page 63 --- 44 THEORY AND CONCEPTS  sensitivity" means that the individual reacts quickly and has a low threshold  for an emotional reaction; that is, it does not take much to provoke an emo­ tional reaaion.
  Events that might not bother many people are likely to bother  the emotionally vulnerable person.
  The sensitive child reacts emotionally to  even slight frustration or disapproval.
- At the adult level, the therapist's leav­ ing town for the weekend may elicit an emotional response from the border­ line patient, but not from most other patients.
+ At the adult level, the therapist's leav­ ing town for the weekend may elicit an emotional response from the borderline patient, but not from most other patients.
  The implications for  psychotherapy are, I suspect, obvious.
  The feeling, noted frequently by ther­ apists and families of borderline individuals, of having to "walk on eggs'' is  a result of this sensitivity.
   "Emotional intensity" means that emotional reaaions are extreme.
@@ -1619,13 +1619,13 @@ g.
   Sexual Abuse.
  The most extreme form of sexism is, of course, sexual  abuse.
  The risk for sexual abuse is approximately two to three times greater  for females than for males (Finkelhor, 1979).
- The prevalence of childhood  sexual abuse in the histories of women meeting criteria for BPD is such that  --- Page 72 --- Dialectical and Biosocial Underpinnings of Treatment 53  it simply cannot be ignored as an important factor in the etiology of the dis­ order.
+ The prevalence of childhood  sexual abuse in the histories of women meeting criteria for BPD is such that  --- Page 72 --- Dialectical and Biosocial Underpinnings of Treatment 53  it simply cannot be ignored as an important factor in the etiology of the disorder.
  Of 12 hospitalized borderline patients assessed by Stone (1981), 9, or  75%, reported a history of incest.
  Childhood sexual abuse was reported by  86% of borderline inpatients compared, to 34% of other psychiatric inpa­ tients, in a study by Bryer, Nelson, Miller, and Krol (1987).
- Among border­ line outpatients, from 67% to 76% report childhood sexual abuse (Herman,  Perry, & van der Kolk, 1989; Wagner, Linehan, & Wasson, 1989), in con­ trast to a 26% rate among nonborderline patients (Herman et al.
+ Among borderline outpatients, from 67% to 76% report childhood sexual abuse (Herman,  Perry, & van der Kolk, 1989; Wagner, Linehan, & Wasson, 1989), in con­ trast to a 26% rate among nonborderline patients (Herman et al.
 , 1989).
-  Ogata, Silk, Goodrich, Lohr, and Westen (1989) found that 71% of border­ line patients reported a history of sexual abuse, compared to 22% of major  depressive control patients.
-  Although in epidemiological data girls are at no higher risk for physical  abuse than boys are, one study found rates of reported childhood physical  abuse to be higher among borderline patients (71%) than among nonborder­ line patients (38%) (Herman et al.
+  Ogata, Silk, Goodrich, Lohr, and Westen (1989) found that 71% of borderline patients reported a history of sexual abuse, compared to 22% of major  depressive control patients.
+  Although in epidemiological data girls are at no higher risk for physical  abuse than boys are, one study found rates of reported childhood physical  abuse to be higher among borderline patients (71%) than among nonborderline patients (38%) (Herman et al.
 , 1989).
  Furthermore, there is a positive  association between physical and sexual abuse (Westen, Ludolph, Misle,  Ruffin, & Block, 1990), suggesting that those at risk for sexual abuse are  at higher risk for physical abuse also.
  Bryer et al.
@@ -2245,7 +2245,7 @@ g.
  At times the borderline  individual automatically inhibits nonverbal expression of negative emotional  experiences even when such expression is appropriate and expected.
  Thus,  she may be experiencing inner turmoil and psychic pain while at the same  time communicating apparent calmness and control.
  Her manner often ap­ pears competent and communicates to others that she is feeling fine and in  control.
- The competent appearance is sometimes enhanced by the border­ line individual's adopting and expressing the beliefs of her environment—  namely, that she is competent across related situations and over time.
+ The competent appearance is sometimes enhanced by the borderline individual's adopting and expressing the beliefs of her environment—  namely, that she is competent across related situations and over time.
  In one  mood state or context, the individual has difficulty prediaing herself in differ­ ent states or situations.
  This smiling, competent facade is easily mistaken by  others for an accurate refleaion of transsituational reality under all or most  conditions.
  When in another emotional state or situation the individual com­ municates helplessness, the observer often interprets such behavior as simply  feigning helplessness to get attention or to frustrate others.
@@ -2274,7 +2274,7 @@ g.
  Thus, when the ther­ apist is not present, the influence is reduced.
  Although this may be due to  a failure in evocative memory, as Adler (1985) suggests, it also may have to  do with the generally less secure nature of a therapeutic relationship.
  Indeed,  therapy relationships are defined by the faa that they end.
- For many border­ line patients, they end prematxurely and abruptly.
+ For many borderline patients, they end prematxurely and abruptly.
  The beneficial effeas of rela­ tionships, of course, are not unique to borderiine patients; we all do better  when we have stable, supportive social support networks (see Sarason, Sara­ son, & Shearin, 1986, for a review).
  The difference is the magnitude of the  discrepancy between borderline patients' capabilities in and out of suppor­ tive relationships.
   It is not clear why relationships have such an effect on these individuals.
@@ -3126,7 +3126,7 @@ g.
  We do not have any data in­ dicating that people who are dead lead better lives.
   I believe that individuals at times make informed and rational decisions  to commit suicide.
  I do not believe that this phenomenon is limited to those  not in psychiatric or psychological treatment.
- Nor do I believe that border­ line patients are incapable of making an informed decision about whether  to commit suicide or not.
+ Nor do I believe that borderline patients are incapable of making an informed decision about whether  to commit suicide or not.
  However, these beliefs in individual liberty do not  mean that I must agree with any person that suicide is a good or even an  acceptable choice.
   In the face of persistent attempts on the part of some borderline patients  to convince their therapists that suicide is a good idea, as well as their occa­ sional success in such attempts, a therapist has to have a predetermined, non- negotiable position on suicide.
  It cannot be a debatable option, lest the pa­ tient lose.
@@ -3169,7 +3169,7 @@ g.
   Thus, the expectations that are perhaps most in need of attention are  not those about the realistic short-term consequences of suicidal behavior.
   Rather, expectations regarding long-range negative outcomes for suicidal be­ havior need to be addressed, as do expectations about alternative problem- solvmg behaviors that may in the long mn prove more effeaive.
  Suicide-related  expectations and beliefs are generally attended to directly only if they are in­ strumental to parasuicide, or suicide crisis behaviors or if they interfere with  more skillful behaviors.
-  Suicide-Related Affect  As noted above, both parasuicidal acts and thinking about suicide are asso­ ciated with relief of intensely negative emotional states among some border­ line and suicidal individuals.
+  Suicide-Related Affect  As noted above, both parasuicidal acts and thinking about suicide are asso­ ciated with relief of intensely negative emotional states among some borderline and suicidal individuals.
  These individuals may report feelings of  relaxation, calmness, and emotional "release" from feelings of panic, intense  anxiety, overwhelming anger, and unbearable shame after they engage in  parasuicide or make plans to commit suicide.
  Such a conneaion may be due  the result of instrumental learning, classical conditioning, or some immedi­ ate neurochemical effea of self-injury.
  At times, positive affeaive experiences,  including sexual arousal, may accompany parasuicidal acts.
@@ -3453,7 +3453,7 @@ g.
  First, borderline patients can be quite per­ suasive in their arguments that the therapeutic relationship is artificially  unegalitarian and one-sided.
  "Why should I be the one taking all the risks?"  they may ask.
  Second, borderline individuals are often extremely capable  caregivers; thus, all too often, therapists make the mistake of becoming over­ ly vulnerable within the therapy.
- It is not unusual for therapists to develop  the habit of sharing their own personal trials and tribulations with border­ line patients, regardless of their relevance to the patients' therapy.
+ It is not unusual for therapists to develop  the habit of sharing their own personal trials and tribulations with borderline patients, regardless of their relevance to the patients' therapy.
  Sexual in­ volvement with a patient is the most exaggerated example here.
  At the other  extreme, therapists can overemphasize the distance between themselves and  their patients.
  Non-DBT therapists justify this by referring to "boundary is­ sues" or the "therapeutic frame.
@@ -3827,7 +3827,7 @@ g.
   Decreasing Behaviors Related to Posttraumatic Stress  When a borderline patient has serious, unresolved, and untreated traumatic  life events, reduction of related stress response pattems is a primary DBT tar­ get.
  As Chapter 2 has indicated, a majority of patients in DBT can be expect­ ed to report at least one instance of sexual abuse in childhood.
  A number  of these patients, as weU as others with no history of sexual abuse, wUl report  physical and emotional trauma and neglea during childhood, which in some  cases may have been especially violent, intrusive, pervasive, and/or chronic.
-  The therapist must be very careful, however, not to assume that all border­ line patients have histories of severe sexual or physical abuse, or even of trau­ matic neglect; some do not.
+  The therapist must be very careful, however, not to assume that all borderline patients have histories of severe sexual or physical abuse, or even of trau­ matic neglect; some do not.
  This does not mean, however, that they may not  have experienced trauma.
  Some have experienced loss of important persons  through death, divorce, or relocation; others have suffered traumatic threats  of loss; StiU others have experienced parental alcoholic rages, unexpected or  persistent traumatic rejeaions, or chaotic life circumstances.
  At a minimum,  if the biosocial theory proposed in Chapter 2 is correct, all borderiine pa­ tients will have experienced pervasive invalidating environments.
@@ -3916,7 +3916,7 @@ g.
 5.
  Even when the facts  of the trauma have been accepted, the individual may continue to disavow  the implications of the traumatic event and to exhibit the other denial-phase  responses listed in the table.
  In individual or group sessions, when cues as­ sociated with the trauma are brought up, the individual may become mute  and stare blankly into space.
- The denial phase is quite simUar to the border­ line syndrome I have described as "inhibited grieving" (see Chapter 3).
+ The denial phase is quite simUar to the borderline syndrome I have described as "inhibited grieving" (see Chapter 3).
   The intrusive phase is similar to what I have described in Chapter 3 as  the emotional viUnerability syndrome.
  During the intrusive phase, a wide range  of stimuli originally unrelated to the trauma may become associated with trau­ ma cues and responses.
  Over time, if this phase lasts long enough, these  responses and associations tend to extinguish.
@@ -5424,7 +5424,7 @@ e.
  TEACHING EMOTION OBSERVATION  AND LABELING SKILLS  SkiUs in observing and labeling emotional experiences and states are an im­ portant target of the skills training module in emotion regulation.
  The ther­ apist must know these skills and help the patient integrate them into daily  Hfe.
  The therapist may also need to teach these skills explicitly when there  is no separate skills training component to the therapy or when that portion  of the skills training occurs too long after the skills are needed.
- Some border­ line patients are quite good at observing and describing emotions; others have  minimal abilities, often existing in an emotional fog.
+ Some borderline patients are quite good at observing and describing emotions; others have  minimal abilities, often existing in an emotional fog.
  They know they are  feeling something, but they have little or no idea of what they are feeling or  how to put it into words.
  With these patients it is often useful to teach them  first how to observe and describe the components of emotions, without neces­ sarily having to put labels on their feelings right away.
   There are many theories of emotions, and just as many theories of the  components of emotional responses.
@@ -7165,7 +7165,7 @@ g.
  Finding another response to reinforce.
  The first strategy is to get the  patient to engage in some behavior that can be reinforced in place of the be­ havior being extinguished.
  According to the principles of shaping (discussed  below), the idea is to get the patient to do something just a little bit better  than usual and then to move in quickly with reinforcement.
- With a border­ line patient this may require much use of problem solving, and considerable  patience, but usually some positive or improved behavior will result if ther­ apist and patient persist.
+ With a borderline patient this may require much use of problem solving, and considerable  patience, but usually some positive or improved behavior will result if ther­ apist and patient persist.
  (At least, it wUl once the patient learns that the ther­ apist is not a person likely to give in and reinforce behaviors that both have  agreed must stop.
 ) The long-term task is to associate adaptive problem-solving  behaviors with more reinforcing outcomes than those linked to maladaptive  behaviors.
   2.
@@ -8398,7 +8398,7 @@ g.
  BLOCKING EXPRESSIVE TENDENCIES  ASSOCIATED WITH PROBLEM EMOTIONS  As I have noted earlier, changing emotionally expressive behavior can be an  effeaive means of changing the emotion one is experiencing.
  Thus, it is helpful  to instruct a patient to try her best to physically express an emotion different  from that elicited by the exposure cues —for example, to focus on relaxing  her facial muscles, and then half smile.
  Patients often resist this procedure.
-  They may be afraid that if they relax their faces they will cry; most border­ line patients are very afraid and/or ashamed of crying.
+  They may be afraid that if they relax their faces they will cry; most borderline patients are very afraid and/or ashamed of crying.
  The therapist may  have to take a gradual approach.
   Working on postural expressions of emotion can also be effective.
  Posi­ tioning of the head, shoulders, arms, torso, and legs is important in express­ ing emotion.
@@ -8795,7 +8795,7 @@ g.
  Unable to equalize  relational power or give up the relationship, they often oscillate between be­ havior that is subservient, needy, and clinging and behavior that is domineer­ ing, dismissing, and rejeaing.
  They go back and forth between overdependence  and overindependence.
  Very few adults are willing to stay for long within in­ timate relationships where their own position of power and influence is so  limited.
- The need for a long-term therapeutic relationship places a border­ line individual in a particularly vulnerable position; effeaive therapy requires  that the therapist be particularly sensitive to this dilemma.
+ The need for a long-term therapeutic relationship places a borderline individual in a particularly vulnerable position; effeaive therapy requires  that the therapist be particularly sensitive to this dilemma.
   Reciprocal communication strategies are designed to reduce the perceived  power differential between therapist and patient; to increase the vulnerabili­ ty of the therapist to the patient, and thereby communicate trust and respect  for the patient; and to deepen the attachment and intimacy of the relation­ ship (see Derlega & Berg, 1987, for reviews of the literature on responsive­ ness and self-disclosure).
  The strategies are discussed below and outlined in  Table 12.
 1.
@@ -9608,7 +9608,7 @@ g.
  Rather than intervening for  the patient in solving problems or getting what the patient needs or wants,  the therapist teaches and coaches the patient in how to resolve problems and  get what she wants and needs.
  Adversity and "bad" treatment of the patient  by the environment are viewed as opportunities for practice and learning: in  other words, lemons are used for making lemonade.
  The patient is taught  to "manage" the environment, not to submit passively to it.
-  --- Page 427 --- 408 BASIC TREATMENT STRATEGIES  Decreasing "Splitting"  The phenomenon of "splitting" occurs with regularity in the lives of border­ line patients.
+  --- Page 427 --- 408 BASIC TREATMENT STRATEGIES  Decreasing "Splitting"  The phenomenon of "splitting" occurs with regularity in the lives of borderline patients.
  Splitting occurs when different individuals in a patient's net­ work are at odds over how to interact with or respond to her.
  Parents may  be split; for example, one parent may want to continue giving the patient  free room and board, whUe the other insists that the patient start paying her  share of household expenses.
  Friends may be split, with some believing that  others are behaving in mean-spirited or destruaive ways.
@@ -12078,7 +12078,7 @@ g.
  DBT does not put  its major emphasis on avoiding mistakes; instead, the major emphasis is on  repairing mistakes skillfully and well.
  A mistake may be thought of as a tear  or rip in a piece of fabric.
  A good DBT therapist is not one who never tears  the fabric, but one who can sew well and makes good repairs.
- Learning that  relationships can be repaired is possibly much more important to a border­ line patient than leaming that repairs are not needed in this particular rela­ tionship (see Kohut, 1984, for a simUar view).
+ Learning that  relationships can be repaired is possibly much more important to a borderline patient than leaming that repairs are not needed in this particular rela­ tionship (see Kohut, 1984, for a simUar view).
   2.
  RELATIONSHIP PROBLEM SOLVING  Relationship problem solving is needed whenever the relationship is a source  of problems for either member Unhappiness, dissatisfaaion, or anger by either  patient or therapist at the other is treated as a signal that the relationship  needs problem-solving attention.
  All of the problem-solving strategies dis­ cussed in Chapter 9 are appropriate here.
@@ -12091,7 +12091,7 @@ g.
   Patients, of course, have a number of complaints about their therapists.
   I have discussed these extensively in Chapter 5 and wUl not go into them again  --- Page 537 --- 518 STRATEGIES FOR SPECIFIC TASKS  here.
  Most problems have to do with patient's wanting more respea, more  emotional reciprocity, less arbitrariness, and more help.
- Above all, border­ line patients want to be heard.
+ Above all, borderline patients want to be heard.
  (More than one clinic patient has told us that  our willingness to admit mistakes is one of their favorite parts of DBT.
 )  The general approach to treating both therapist and patient relationship- interfering behaviors is to approach them as problems to be solved, to as­ sume that the individuals are motivated to solve problems in the therapy rela­ tionship, and to believe that such problems can be solved.
  It is not assumed  that one party or the other is primarily responsible for problems that arise.
@@ -12476,7 +12476,7 @@ g.
  P.
 , & Doghramji, K.
  (1986).
- The demographic profUe of border­ line personality disorder.
+ The demographic profUe of borderline personality disorder.
  Journal of Clinical Psychiatry, 47, 196-198.
   Akiskal, H.
  S.
@@ -12673,7 +12673,7 @@ J.
 , Freeman, A.
 , & Associates.
  (1990).
- Cognitive therapy of personality dis­ orders.
+ Cognitive therapy of personality disorders.
  New York: GuUford Press.
   Beck, A.
  T.
@@ -12932,7 +12932,7 @@ S.
 , & Schulz, P.
  M.
  (1989).
- An evaluation of the significance of seleaed  neuropsychiatric abnormalities in the etiology of borderline personality dis­ order.
+ An evaluation of the significance of seleaed  neuropsychiatric abnormalities in the etiology of borderline personality disorder.
  Journal of Personality Disorders, 3, 19-25.
   Cornsweet, D.
  J.
@@ -13119,7 +13119,7 @@ S.
  Science, 221, 1208-1210.
   Ekstein, R.
  (1955).
- Vicissitudes of the "internal image" in the recovery of a border­ line schizophrenic adolescent.
+ Vicissitudes of the "internal image" in the recovery of a borderline schizophrenic adolescent.
  Bulletin of the Menninger Clinic, 19, 86-92.
   EUis, A.
  (1962).
@@ -13224,7 +13224,7 @@ S.
 , & Cowdry, R.
  W.
  (1986).
- Alprazolam-induced dyscontrol in border­ line personality disorder American Journal of Psychiatry, 143, 519-522.
+ Alprazolam-induced dyscontrol in borderline personality disorder American Journal of Psychiatry, 143, 519-522.
   Gardner, D.
  L.
 , & Cowdry, R.
@@ -13722,7 +13722,7 @@ S.
  New  Haven, CT: Yale University Press.
   Klein, D.
  E (1977).
- Psychopharmacological treatment & delineation of borderiine dis­ orders.
+ Psychopharmacological treatment & delineation of borderiine disorders.
  In R HartocoUis (Ed.
 ), Borderline personality disorder: the concept,  the syndrome, the patient (pp.
  365-383).
@@ -14216,7 +14216,7 @@ B.
   McGlashen, T.
  H.
  (1987).
- Borderline personality disorder and unipolar affective dis­ order Journal of Nervous and Mental Disease, 175, 467-473.
+ Borderline personality disorder and unipolar affective disorder Journal of Nervous and Mental Disease, 175, 467-473.
   McGuire, W.
  J.
 , SiC McGuire, C V.
@@ -14322,7 +14322,7 @@ K.
  Disorders of personality DSM-III: Axis II.
  New York: WUey  Millon, T.
  (1987a).
- On the genesis and prevalence of the borderline personahty dis­ order: A social learning thesis.
+ On the genesis and prevalence of the borderline personahty disorder: A social learning thesis.
  Journal of Personality Disorders, 1, 354-372.
   MUlon, T.
  (1987b).
@@ -14526,7 +14526,7 @@ E.
  C, & Cooper, S.
  H.
  (1985).
- Psychodynamics, symptoms, and outcome in  borderline and antisocial personality disorders and bipolar type II affeaive dis­ order In T.
+ Psychodynamics, symptoms, and outcome in  borderline and antisocial personality disorders and bipolar type II affeaive disorder In T.
  H.
  McGlashan (Ed.
 ), The borderline: Current empirical research  (pp.
@@ -14628,7 +14628,7 @@ E.
  Com­ munity Mental Health Journal, 12, 301-305.
   Rinsley, D.
  (1980a).
- The developmental etiology of borderline and narcissistic dis­ orders.
+ The developmental etiology of borderline and narcissistic disorders.
  Bulletin of the Menninger Clinic, 44, 127-134.
   Rinsley, D.
  (1980b).
@@ -14905,7 +14905,7 @@ D.
  H.
 , & MUlward, J.
  (1983).
- Psychiatric disorders in the famUies of border­ line patients.
+ Psychiatric disorders in the famUies of borderline patients.
  Archives of General Psychiatry, 40, 37-44.
   Spitzer, R.
  L.
@@ -15277,7 +15277,7 @@ D.
  Paper  presented at the Society for the Exploration of Psychotherapy Integration, Cam­ bridge, MA, April.
   Young, J.
  & Swift, W (1988).
- Schema-focused cognitive therapy for personality dis­ orders: Part I.
+ Schema-focused cognitive therapy for personality disorders: Part I.
  International Cognitive Therapy Newsletter, 4, 13-14.
   Zajonc, R.
  B.
