@@ -1,14 +1,30 @@
  --- Page 2 ---       Mastering Your AdultADHD  --- Page 3 ---       Editor- In- Chief David H.
- Barlow,PhD Scientific AdvisoryBoard Anne Marie Albano,PhD Gillian Butler,PhD David M.
- Clark,PhD Edna B.
- Foa,PhD Paul J.
- Frick,PhD Jack M.
- Gorman,MD Kirk Heilbrun,PhD Robert J.
- McMahon,PhD Peter E.
- Nathan,PhD Christine Maguth Nezu,PhD Matthew K.
- Nock,PhD Paul Salkovskis,PhD Bonnie Spring,PhD Gail Steketee,PhD John R.
- Weisz,PhD G.
- Terence Wilson,PhDTREATMENTS  THAT WORK    --- Page 4 --- 1TREATMENTS  THAT WORK CLIENT WORKBOOK 1      STEVEN A.
+ Barlow,PhD
+ Scientific AdvisoryBoard Anne Marie Albano,PhD
+ Gillian Butler,PhD
+ David M.
+ Clark,PhD
+ Edna B.
+ Foa,PhD
+ Paul J.
+ Frick,PhD
+ Jack M.
+ Gorman,MD Kirk Heilbrun,PhD
+ Robert J.
+ McMahon,PhD
+ Peter E.
+ Nathan,PhD
+ Christine Maguth Nezu,PhD
+ Matthew K.
+ Nock,PhD
+ Paul Salkovskis,PhD
+ Bonnie Spring,PhD
+ Gail Steketee,PhD
+ John R.
+ Weisz,PhD
+ G.
+ Terence Wilson,PhD
+TREATMENTS  THAT WORK    --- Page 4 --- 1TREATMENTS  THAT WORK CLIENT WORKBOOK 1      STEVEN A.
 SAFREN SUSAN E.
 SPRICH CAROL A.
  PERLMAN MICHAEL W.
@@ -202,8 +218,7 @@ g.
 ) In this study, the people who got the treatment had significantly lower  symptoms of ADHD after the treatment.
  This was evaluated by an  independent assessor who did not know whether the participants got  the treatment or not, and by the self- report of participants who completed written questionnaires about their symptoms.
  According to these      --- Page 25 --- 12assessments, patients who went through the program experienced about  a 50% decrease in symptoms, and those who did not had negligible  changes.
- Later, we conducted a larger five- year study funded by a grant from the  National Institute of Mental Health (to Dr.
-Safren), also using the first  version of our treatment manual.
+ Later, we conducted a larger five- year study funded by a grant from the  National Institute of Mental Health (to Dr. Safren), also using the first  version of our treatment manual.
  This study involved comparing the  treatment in this manual plus continued medications to a comparison  treatment (relaxation plus educational support) plus continued medications (Safren, Sprich, Mimiaga, Surman, Knouse, Groves, & Otto, 2010).
   Eighty- six adults with ADHD participated in this study.
  We found that  participants receiving cognitive- behavioral treatment achieved lower  scores on measures of ADHD compared with participants receiving the  comparison treatment, and there were more responders in the cognitive-  behavioral treatment group than the comparison group.
@@ -1553,42 +1568,37 @@ g.
  relaxation with educational support for medication-  treated adults with ADHD and persistent symptoms:Arandomized controlled trial.
  JAMA ,  304(8), 875 880.
   --- Page 140 --- 127 About theAuthors Steven A.
- Safren, PhD , is currently a Professor of Psychology at the  University of Miami.
+ Safren, PhD
+ , is currently a Professor of Psychology at the  University of Miami.
  His grant- funded work related to ADHD includes  being the principal investigator (PI) of a five- year NIMH R01 to study  the efficacy of cognitive- behavioral therapy (CBT) for ADHD in adults,  and the lead author of the outcome of that trial published in JAMA the  Journal of the American Medical Association .
- He was also the PI of a two-  year NIMH R03 that studied the initial efficacy of CBT for ADHD in  adults, and multiple PI (with Dr.
-Sprich) of a three- year R34 to examine the efficacy of this approach with adolescents.
- Before working at the  University of Miami, Dr.
- Safren was, for 18 years, at the Department  of Psychiatry at Massachusetts General Hospital (MGH)/ Harvard  Medical School, where he was a Professor of Psychology and Director  of Behavioral Medicine.
+ He was also the PI of a two-  year NIMH R03 that studied the initial efficacy of CBT for ADHD in  adults, and multiple PI (with Dr. Sprich) of a three- year R34 to examine the efficacy of this approach with adolescents.
+ Before working at the  University of Miami, Dr.  Safren was, for 18 years, at the Department  of Psychiatry at Massachusetts General Hospital (MGH)/ Harvard  Medical School, where he was a Professor of Psychology and Director  of Behavioral Medicine.
  There he served in a variety of other roles, such  as the Director for the Cognitive Behavioral Therapy and Behavioral  Medicine Clinical Psychology Internship tracks, and as the Associate  Director of the Cognitive Behavioral Therapy Program.
  Additionally, he  maintained a clinical practice treating clients with CBT at MGH.
- At the  time of writing, Dr.
-Safren has over 250 publications in the areas of CBT,  psychopathology, and their application to a variety of clinical problems in  adults.
- In addition to his focus on adult ADHD, Dr.
-Safren has a major  focus working on the development and testing of interventions related to  medical problems such as HIV.
+ At the  time of writing, Dr. Safren has over 250 publications in the areas of CBT,  psychopathology, and their application to a variety of clinical problems in  adults.
+ In addition to his focus on adult ADHD, Dr. Safren has a major  focus working on the development and testing of interventions related to  medical problems such as HIV.
  This work is also funded by the National  Institutes of Health.
  Susan E.
- Sprich, PhD , is the Director of the Cognitive Behavioral  Therapy Program at MGH and an Assistant Professor in Psychology at  Harvard Medical School.
+ Sprich, PhD
+ , is the Director of the Cognitive Behavioral  Therapy Program at MGH and an Assistant Professor in Psychology at  Harvard Medical School.
  She also serves as the Director of Postgraduate  Psychology Education at the Psychiatry Academy at MGH.
  She was the  Project Director of a five- year study of CBT for adult ADHD and the  co- PI of a three- year study of CBT for adolescent ADHD, both funded  by NIMH.
  She is also involved in clinical research in the treatment of  Obsessive- Compulsive Disorder, Autism Spectrum Disorders, trichotillomania, and other anxiety and mood disorders.
  She has authored over  20 publications in the areas of ADHD and anxiety disorders in children     --- Page 141 --- 128and adults.
- Dr.
-Sprich conducts CBT with clients with mood disorders,  anxiety disorders, and ADHD through the Cognitive Behavioral Therapy  Program at MGH and in private practice.
- Dr.
-Sprich received her doctorate in clinical psychology from the State University of NewYork at  Albany, and did her predoctoral and postdoctoral fellowships in CBT at  MGH/ Harvard Medical School.
+ Dr. Sprich conducts CBT with clients with mood disorders,  anxiety disorders, and ADHD through the Cognitive Behavioral Therapy  Program at MGH and in private practice.
+ Dr. Sprich received her doctorate in clinical psychology from the State University of NewYork at  Albany, and did her predoctoral and postdoctoral fellowships in CBT at  MGH/ Harvard Medical School.
  Carol A.
-Perlman, PhD , is a Cognitive Behavioral Therapist who specializes in the treatment of mood disorders, anxiety disorders, and adult  ADHD.
- Dr.
- Perlman was formerly a Clinical Assistant in Psychology  at MGH, Instructor in Psychology at Harvard Medical School, and  Project Director at the Harvard University Department of Psychology.
+Perlman, PhD
+ , is a Cognitive Behavioral Therapist who specializes in the treatment of mood disorders, anxiety disorders, and adult  ADHD.
+ Dr.  Perlman was formerly a Clinical Assistant in Psychology  at MGH, Instructor in Psychology at Harvard Medical School, and  Project Director at the Harvard University Department of Psychology.
   She received her doctorate in clinical psychology from the University of  Miami in Coral Gables, Florida, and her postdoctoral training at MGH/  Harvard Medical School.
  She served as a therapist for the initial study  of CBT for adult ADHD and a Co- Investigator and therapist for the  efficacy study.
- Dr.
-Perlman has published over 20 articles in the area of  mood disorders, posttraumatic stress disorder, and adult ADHD.
+ Dr. Perlman has published over 20 articles in the area of  mood disorders, posttraumatic stress disorder, and adult ADHD.
  She  is a national workshop presenter on CBT.
- Dr.
-Perlman is the owner of  Perlman Psychology Associates, LLC and maintains a private practice in  Medway, Massachusetts.
+ Dr. Perlman is the owner of  Perlman Psychology Associates, LLC and maintains a private practice in  Medway, Massachusetts.
  Michael W .
-Otto, PhD , is Professor of Psychological and Brain Sciences  at Boston University.
+Otto, PhD
+ , is Professor of Psychological and Brain Sciences  at Boston University.
  He specializes in CBT of anxiety, mood, and substance use disorders.
  He has had a major career focus on developing and  validating new psychosocial treatments, including treatments for ADHD.
   His research includes a translational research agenda investigating brain  behavior relationships in therapeutic learning, including the use of novel  medications (e.
@@ -1596,8 +1606,6 @@ g.
 , d- cycloserine, yohimbine) and novel behavioral strategies to improve therapeutic learning/ outcome.
  His focus on hard- to- treat  conditions and principles underlying behavior- change failures led him  to an additional focus on health behavior promotion, including investigations of addictive behaviors, medication adherence, sleep, smoking,  and exercise.
  Across these health behaviors, he has been concerned with  cognitive, attention, and affective factors that derail adaptive behaviors,  and the factors that can rescue these processes.
- Dr.
-Otto has over 370  publications spanning his research interests and was identified as a top  producer in the clinical empirical literature.
- Dr.
-Otto is a past President  of the Association for Behavioral and Cognitive Therapies, a member of  the Scientific Advisory Board for the Anxiety and Depression Association  of America, and President Elect of the Society for Clinical Psychology.
+ Dr. Otto has over 370  publications spanning his research interests and was identified as a top  producer in the clinical empirical literature.
+ Dr. Otto is a past President  of the Association for Behavioral and Cognitive Therapies, a member of  the Scientific Advisory Board for the Anxiety and Depression Association  of America, and President Elect of the Society for Clinical Psychology.
  
